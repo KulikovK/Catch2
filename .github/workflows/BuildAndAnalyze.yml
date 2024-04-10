@@ -8,7 +8,7 @@ jops:
   build-analyze:
     runs-on: windows-latest
     env:
-      PVS_STUDIO_CMD: "C:/Program Files (x86)/PVS-Studio/PVS-Studio_Cmd.exe",
+      PVS_STUDIO_CMD: "C:/Program Files (x86)/PVS-Studio/PVS-Studio_Cmd.exe"
       PVS_PLOG_CONVERTER: "C:/Program Files (x86)/PVS-Studio/HtmlGenerator.exe"
     steps:
       - name: Check out
