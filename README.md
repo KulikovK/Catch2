@@ -10,6 +10,7 @@
 [![Try online](https://img.shields.io/badge/try-online-blue.svg)](https://godbolt.org/z/EdoY15q9G)
 [![Join the chat in Discord: https://discord.gg/4CWS9zD](https://img.shields.io/badge/Discord-Chat!-brightgreen.svg)](https://discord.gg/4CWS9zD)
 
+[![.github/workflows/BuildAndAnalyze.yml](https://github.com/KulikovK/Catch2/actions/workflows/BuildAndAnalyze.yml/badge.svg)](https://github.com/KulikovK/Catch2/actions/workflows/BuildAndAnalyze.yml)
 
 ## What is Catch2?
 
