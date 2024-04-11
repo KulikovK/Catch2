@@ -53,6 +53,5 @@ jobs:
       - name: Publich static analysis report
         uses: github/codeql-action/upload-sarif@v3
         with:
-          working-directory: ${{github.workspace}}/build
           sarif_file: ${{github.workspace}}/build/${{matrix.config.pvs_sarif}}
           category: PVS-Studio  
