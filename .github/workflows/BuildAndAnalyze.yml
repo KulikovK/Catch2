@@ -14,11 +14,10 @@ jobs:
           - {
               name: "Windows",
               os: "windows-latest",
-              pvs_analyzer: "C:/Program Files (x86)/PVS-Studio/PVS-Studio_Cmd.exe",
+              pvs_analyzer: "C:/Program Files (x86)/PVS-Studio/CompilerCommandsAnalyzer.exe",
               pvs_converter: "C:/Program Files (x86)/PVS-Studio/HtmlGenerator.exe",
               blame_notifier: "C:/Program Files (x86)/PVS-Studio/BlameNotifier.exe",
-              sln_file: "Catch2.sln",
-              pvs_log: "PVS-Studio_Log.json",
+              pvs_log: "PVS-Studio_Log.log",
               pvs_sarif: "PVS-Studio_Log.sarif"
             }
 
@@ -40,25 +39,28 @@ jobs:
         if: runner.os == 'Windows'
         uses: crazy-max/ghaction-chocolatey@v3
         with: 
-          args: install pvs-studio
-
+          args: install pvs-studio ninja
+ 
+      - name: Initialize MSVC development environment
+        uses: ilammy/msvc-dev-cmd@v1
+          
       - name: Activate PVS-Studio
         env:
           USER_NAME: ${{ secrets.PVS_USER_NAME }}
           LIC_KEY: ${{ secrets.PVS_LIC_KEY }}
         #run:  Start-Process -FilePath "${{ matrix.config.pvs_analyzer }}" -NoNewWindow -Wait -ArgumentList "credentials", "-u", "${{ env.USER_NAME }}", "-l", "${{env.LIC_KEY}}"
         shell: bash
-        run: "\"${{matrix.config.pvs_analyzer}}\" credentials -u \"${{env.USER_NAME}}\" -l \"${{env.LIC_KEY}}\""
+        run: "\"${{matrix.config.pvs_analyzer}}\" credentials \"${{env.USER_NAME}}\" \"${{env.LIC_KEY}}\""
 
       - name: Configure
-        run:  cmake -G "Visual Studio 17 2022" -S "${{ github.workspace }}" -B "${{github.workspace}}/build"
+        run:  cmake -G "Ninja" -DCMAKE_EXPORT_COMPILE_COMMANDS=On -S "${{ github.workspace }}" -B "${{github.workspace}}/build"
 
       - name: Build 
         run:  cmake --build "${{github.workspace}}/build"
 
       - name: Analyzer with PVS-Studio
         shell: bash
-        run: "\"${{matrix.config.pvs_analyzer}}\" -t \"${{matrix.config.sln_file}}\" -o \"${{matrix.config.pvs_log}}\"" 
+        run: "\"${{matrix.config.pvs_analyzer}}\" -f \"${{github.workspace}}/build/compile_commands.json\" -o \"${{matrix.config.pvs_log}}\" -j" 
         working-directory: ${{github.workspace}}/build
       
       - name: Convert Result
