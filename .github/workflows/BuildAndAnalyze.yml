@@ -21,6 +21,6 @@ jobs:
           args: install pvs-studio
 
       - name: Activate PVS-Studio
-        run:  ${{ env.PVS_STUDIO_CMD }} credentials -u "${{ secrets.PVS_USER_NAME }}" -l ${{ secrets.PVS_LIC_KEY }}
+        run:  "${{ env.PVS_STUDIO_CMD }}" credentials -u "${{ secrets.PVS_USER_NAME }}" -l ${{ secrets.PVS_LIC_KEY }}
 
 
