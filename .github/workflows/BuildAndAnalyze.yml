@@ -14,7 +14,7 @@ jobs:
           - {
               name: "Windows",
               os: "windows-latest",
-              pvs_analyzer: "C:/Program Files (x86)/PVS-Studio/CompilerCommandsAnalyzer.exe",
+              pvs_analyzer: "C:/Program Files (x86)/PVS-Studio/PVS-Studio_Cmd.exe",
               pvs_converter: "C:/Program Files (x86)/PVS-Studio/HtmlGenerator.exe",
               blame_notifier: "C:/Program Files (x86)/PVS-Studio/BlameNotifier.exe",
               pvs_log: "PVS-Studio_Log.log",
@@ -50,17 +50,17 @@ jobs:
           LIC_KEY: ${{ secrets.PVS_LIC_KEY }}
         #run:  Start-Process -FilePath "${{ matrix.config.pvs_analyzer }}" -NoNewWindow -Wait -ArgumentList "credentials", "-u", "${{ env.USER_NAME }}", "-l", "${{env.LIC_KEY}}"
         shell: bash
-        run: "\"${{matrix.config.pvs_analyzer}}\" credentials \"${{env.USER_NAME}}\" \"${{env.LIC_KEY}}\""
+        run: "\"${{matrix.config.pvs_analyzer}}\" credentials -u \"${{env.USER_NAME}}\" -l \"${{env.LIC_KEY}}\""
 
       - name: Configure
-        run:  cmake -G "Ninja" -DCMAKE_EXPORT_COMPILE_COMMANDS=On -S "${{ github.workspace }}" -B "${{github.workspace}}/build"
+        run:  cmake -G "Visual Studio 17 2022" -DCMAKE_EXPORT_COMPILE_COMMANDS=Off -S "${{ github.workspace }}" -B "${{github.workspace}}/build"
 
       - name: Build 
         run:  cmake --build "${{github.workspace}}/build"
 
       - name: Analyzer with PVS-Studio
         shell: bash
-        run: "\"${{matrix.config.pvs_analyzer}}\" -f \"${{github.workspace}}/build/compile_commands.json\" -o \"${{matrix.config.pvs_log}}\" -j" 
+        run: "\"${{matrix.config.pvs_analyzer}}\" -t \"${{github.workspace}}/build/Catch2.sln\" -o \"${{matrix.config.pvs_log}}\" -j" 
         working-directory: ${{github.workspace}}/build
       
       - name: Convert Result
