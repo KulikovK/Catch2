@@ -68,8 +68,8 @@ jobs:
         run: "\"${{matrix.config.pvs_converter}}\" -t \"sarif\" -a all -o \"${{matrix.config.pvs_sarif}}\" \"${{matrix.config.pvs_log}}\""
         working-directory: ${{github.workspace}}/build
 
-      - name: Publich static analysis report
+      - name: Publish static analysis report
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: ${{github.workspace}}/build/${{matrix.config.pvs_sarif}}
+          sarif_file: "${{github.workspace}}\\build\\${{matrix.config.pvs_sarif}}"
           category: PVS-Studio  
