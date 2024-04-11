@@ -37,8 +37,9 @@ jobs:
 
       - name: Analyzer
         shell: pwsh
-        run:  Start-Process -FilePath "${{ env.PVS_STUDIO_CMD }}" -NoNewWindow -Wait -ArgumentList "-t", "${{env.SLN_FILE}}", "-r", "-o", "${{env.PVS_LOG}}"
-              Start-Process -FilePath "${{ env.PVS_PLOG_CONVERTER }}" -NoNewWindow -Wait -ArgumentList "-t", "sarif", "-a", "all", "-o", "${{env.PVS_SARIF}}", "${{env.PVS_LOG}}"
+        run: |
+          Start-Process -FilePath "${{ env.PVS_STUDIO_CMD }}" -NoNewWindow -Wait -ArgumentList "-t", "${{env.SLN_FILE}}", "-r", "-o", "${{env.PVS_LOG}}"
+          Start-Process -FilePath "${{ env.PVS_PLOG_CONVERTER }}" -NoNewWindow -Wait -ArgumentList "-t", "sarif", "-a", "all", "-o", "${{env.PVS_SARIF}}", "${{env.PVS_LOG}}"
 
       - name: Publich static analysis report
         uses: github/codeql-action/upload-sarif@v3
