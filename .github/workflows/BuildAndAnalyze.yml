@@ -49,8 +49,10 @@ jobs:
           Start-Process -FilePath "${{ matrix.config.pvs_analyzer }}" -NoNewWindow -Wait -ArgumentList "-t", "Catch2.sln", "-r", "-o", "${{matrix.config.pvs_log}}"
           Start-Process -FilePath "${{ matrix.config.pvs_converter }}" -NoNewWindow -Wait -ArgumentList "-t", "sarif", "-a", "all", "-o", "${{ matrix.config.pvs_sarif}}", "${{ matrix.config.pvs_log }}"
         working-directory: ${{github.workspace}}/build
+      
       - name: Publich static analysis report
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: ${{matrix.config.pvs_sarif}}
+          working-directory: ${{github.workspace}}/build
+          sarif_file: ${{github.workspace}}/build/${{matrix.config.pvs_sarif}}
           category: PVS-Studio  
