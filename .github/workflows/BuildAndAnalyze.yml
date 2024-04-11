@@ -13,7 +13,8 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Check out
-      - uses: actions/checkout@v4
+        uses: actions/checkout@v4
+        
       - name: Choco install tools
         uses: crazy-max/ghaction-chocolatey@v3
         with: 
