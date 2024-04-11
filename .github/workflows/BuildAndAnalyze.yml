@@ -7,10 +7,16 @@ on: [push]
 env:
   PVS_STUDIO_CMD: "C:/Program Files (x86)/PVS-Studio/PVS-Studio_Cmd.exe"
   PVS_PLOG_CONVERTER: "C:/Program Files (x86)/PVS-Studio/HtmlGenerator.exe"
+  BLAME_NOTIFIER: "C:/Program Files (x86)/PVS-Studio/BlameNotifier.exe"
+  BUILD_FOLDER: "${{ github.workspace }}/build"
+  SLN_FILE: "${{ github.env.BUILD_FOLDER }}/Catch2.sln"
+  PVS_LOG: "${{github.env.BUILD_FOLDER}}/PVS-Studio_Log.json"
+  PVS_SARIF: "${{github.env.BUILD_FOLDER}}/PVS-Studio_Log.sarif"
 
 jobs:
   build-analyze:
     runs-on: windows-latest
+    timeout-minutes: 30
     steps:
       - name: Check out
         uses: actions/checkout@v4
@@ -30,4 +36,12 @@ jobs:
         run:  cmake --build "${{ github.workspace }}/build"
 
       - name: Analyzer
-        run:  Start-Process -FilePath "${{ env.PVS_STUDIO_CMD }}" -NoNewWindow -Wait -ArgumentList "-t", "${{ github.workspace }}/build/Catch2.sln"
+        shell: pwsh
+        run:  Start-Process -FilePath "${{ env.PVS_STUDIO_CMD }}" -NoNewWindow -Wait -ArgumentList "-t", "${{env.SLN_FILE}}", "-r", "-o", "${{env.PVS_LOG}}",
+              Start-Process -FilePath "${{ env.PVS_PLOG_CONVERTER }}" -NoNewWindow -Wait -ArgumentList "-t", "sarif", "-a", "all", "-o", "${{env.PVS_SARIF}}", "${{env.PVS_LOG}}"
+
+      - name: Publich static analysis report
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: ${{env.PVS_SARIF}}
+          category: PVS-Studio  
