@@ -17,7 +17,7 @@ jobs:
               pvs_analyzer: "C:/Program Files (x86)/PVS-Studio/PVS-Studio_Cmd.exe",
               pvs_converter: "C:/Program Files (x86)/PVS-Studio/HtmlGenerator.exe",
               blame_notifier: "C:/Program Files (x86)/PVS-Studio/BlameNotifier.exe",
-              pvs_log: "PVS-Studio_Log.log",
+              pvs_log: "PVS-Studio_Log.json",
               pvs_sarif: "PVS-Studio_Log.sarif"
             }
 
