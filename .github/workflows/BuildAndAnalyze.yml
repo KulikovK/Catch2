@@ -21,6 +21,17 @@ jobs:
               pvs_log: "PVS-Studio_Log.json",
               pvs_sarif: "PVS-Studio_Log.sarif"
             }
+
+          #- {
+          #  name: "Linux",
+          #  os: "ubuntu-latest",
+          #  pvs_analyzer: "pvs-studio-analyzer",
+          #  pvs_converter: "plog-converter",
+          #  blame_notifier: "blame-notofier",
+          #  sln_file: "compile_commands.json",
+          #  pvs_log: "PVS-Studio.log",
+          #  pvs_sarif: "PVS-Studio.sarif"
+          # }
     steps:
       - name: Check out
         uses: actions/checkout@v4
@@ -43,13 +54,18 @@ jobs:
       - name: Build 
         run:  cmake --build "${{github.workspace}}/build"
 
-      - name: Analyzer
+      - name: Analyzer with PVS-Studio
         shell: pwsh
-        run: |
+        run: #|
           Start-Process -FilePath "${{ matrix.config.pvs_analyzer }}" -NoNewWindow -Wait -ArgumentList "-t", "Catch2.sln", "-r", "-o", "${{matrix.config.pvs_log}}"
-          Start-Process -FilePath "${{ matrix.config.pvs_converter }}" -NoNewWindow -Wait -ArgumentList "-t", "sarif", "-a", "all", "-o", "${{ matrix.config.pvs_sarif}}", "${{ matrix.config.pvs_log }}"
+         # Start-Process -FilePath "${{ matrix.config.pvs_converter }}" -NoNewWindow -Wait -ArgumentList "-t", "sarif", "-a", "all", "-o", "${{ matrix.config.pvs_sarif}}", "${{ matrix.config.pvs_log }}"
         working-directory: ${{github.workspace}}/build
       
+      - name: Convert Result
+        shell: bash
+        run: ${{matrix.config.pvs_converter}} -t "sarif" -a all -o "${{matrix.config.pvs_sarif}}" "${{matrix.config.pvs_log}}"
+        working-directory: ${{github.workspace}}/build
+
       - name: Publich static analysis report
         uses: github/codeql-action/upload-sarif@v3
         with:
