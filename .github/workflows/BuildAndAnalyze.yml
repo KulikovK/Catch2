@@ -46,7 +46,9 @@ jobs:
         env:
           USER_NAME: ${{ secrets.PVS_USER_NAME }}
           LIC_KEY: ${{ secrets.PVS_LIC_KEY }}
-        run:  Start-Process -FilePath "${{ matrix.config.pvs_analyzer }}" -NoNewWindow -Wait -ArgumentList "credentials", "-u", "${{ env.USER_NAME }}", "-l", "${{env.LIC_KEY}}"
+        #run:  Start-Process -FilePath "${{ matrix.config.pvs_analyzer }}" -NoNewWindow -Wait -ArgumentList "credentials", "-u", "${{ env.USER_NAME }}", "-l", "${{env.LIC_KEY}}"
+        shell: bash
+        run: "\"${{matrix.config.pvs_analyzer}}\" credentials -u \"${{env.USER_NAME}}\" -l \"${{env.LIC_KEY}}\""
 
       - name: Configure
         run:  cmake -G "Visual Studio 17 2022" -S "${{ github.workspace }}" -B "${{github.workspace}}/build"
@@ -63,7 +65,7 @@ jobs:
       
       - name: Convert Result
         shell: bash
-        run: ${{matrix.config.pvs_converter}} -t "sarif" -a all -o "${{matrix.config.pvs_sarif}}" "${{matrix.config.pvs_log}}"
+        run: "\"${{matrix.config.pvs_converter}}\" -t \"sarif\" -a all -o \"${{matrix.config.pvs_sarif}}\" \"${{matrix.config.pvs_log}}\""
         working-directory: ${{github.workspace}}/build
 
       - name: Publich static analysis report
