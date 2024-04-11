@@ -4,45 +4,55 @@ run-name: ${{github.actor}} - static analysis
 
 on: [push]
 
-env:
-  PVS_STUDIO_CMD: "C:/Program Files (x86)/PVS-Studio/PVS-Studio_Cmd.exe"
-  PVS_PLOG_CONVERTER: "C:/Program Files (x86)/PVS-Studio/HtmlGenerator.exe"
-  BLAME_NOTIFIER: "C:/Program Files (x86)/PVS-Studio/BlameNotifier.exe"
-  BUILD_FOLDER: "${{ github.workspace }}/build"
-  SLN_FILE: "${{ github.env.BUILD_FOLDER }}/Catch2.sln"
-  PVS_LOG: "${{github.env.BUILD_FOLDER}}/PVS-Studio_Log.json"
-  PVS_SARIF: "${{github.env.BUILD_FOLDER}}/PVS-Studio_Log.sarif"
-
 jobs:
   build-analyze:
-    runs-on: windows-latest
+    runs-on: ${{matrix.config.os}}
     timeout-minutes: 30
+    strategy:
+      matrix:
+        config:
+          - {
+              name: "Windows",
+              os: "windows-latest",
+              pvs_analyzer: "C:/Program Files (x86)/PVS-Studio/PVS-Studio_Cmd.exe",
+              pvs_converter: "C:/Program Files (x86)/PVS-Studio/HtmlGenerator.exe",
+              blame_notifier: "C:/Program Files (x86)/PVS-Studio/BlameNotifier.exe",
+              build_folder: "${{ github.workspace }}/build",
+              sln_file: "${{ github.workspace }}/build/Catch2.sln",
+              pvs_log: "${{ github.workspace }}/build/PVS-Studio_Log.json",
+              pvs_sarif: "${{ github.workspace }}/build/PVS-Studio_Log.sarif"
+
+            }
     steps:
       - name: Check out
         uses: actions/checkout@v4
 
       - name: Choco install tools
+        if: runner.os == 'Windows'
         uses: crazy-max/ghaction-chocolatey@v3
         with: 
           args: install pvs-studio
 
       - name: Activate PVS-Studio
-        run:  Start-Process -FilePath "${{ env.PVS_STUDIO_CMD }}" -NoNewWindow -Wait -ArgumentList "credentials", "-u", "${{ secrets.PVS_USER_NAME }}", "-l", "${{ secrets.PVS_LIC_KEY }}"
+        env:
+          USER_NAME: ${{ secrets.PVS_USER_NAME }}
+          LIC_KEY: ${{ secrets.PVS_LIC_KEY }}
+        run:  Start-Process -FilePath "${{ matrix.config.pvs_analyzer }}" -NoNewWindow -Wait -ArgumentList "credentials", "-u", "${{ env.USER_NAME }}", "-l", "${{env.LIC_KEY}}"
 
       - name: Configure
-        run:  cmake -G "Visual Studio 17 2022" -S "${{ github.workspace }}" -B "${{ github.workspace }}/build"
+        run:  cmake -G "Visual Studio 17 2022" -S "${{ github.workspace }}" -B "${{matrix.config.build_folder}}"
 
-      - name: Build
-        run:  cmake --build "${{ github.workspace }}/build"
+      - name: Build 
+        run:  cmake --build "${{matrix.config.build_folder}}"
 
       - name: Analyzer
         shell: pwsh
         run: |
-          Start-Process -FilePath "${{ env.PVS_STUDIO_CMD }}" -NoNewWindow -Wait -ArgumentList "-t", "${{env.SLN_FILE}}", "-r", "-o", "${{env.PVS_LOG}}"
-          Start-Process -FilePath "${{ env.PVS_PLOG_CONVERTER }}" -NoNewWindow -Wait -ArgumentList "-t", "sarif", "-a", "all", "-o", "${{env.PVS_SARIF}}", "${{env.PVS_LOG}}"
+          Start-Process -FilePath "${{ matrix.config.pvs_analyzer }}" -NoNewWindow -Wait -ArgumentList "-t", "${{matrix.config.sln_file}}", "-r", "-o", "${{matrix.config.pvs_log}}"
+          Start-Process -FilePath "${{ matrix.config.pvs_converter }}" -NoNewWindow -Wait -ArgumentList "-t", "sarif", "-a", "all", "-o", "${{ matrix.config.pvs_sarif}}", "${{ matrix.config.pvs_log }}"
 
       - name: Publich static analysis report
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: ${{env.PVS_SARIF}}
+          sarif_file: ${{matrix.config.pvs_sarif}}
           category: PVS-Studio  
