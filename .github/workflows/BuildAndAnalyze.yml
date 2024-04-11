@@ -8,7 +8,7 @@ environment:
   PVS_STUDIO_CMD: "C:/Program Files (x86)/PVS-Studio/PVS-Studio_Cmd.exe"
   PVS_PLOG_CONVERTER: "C:/Program Files (x86)/PVS-Studio/HtmlGenerator.exe"
 
-jops:
+jobs:
   build-analyze:
     runs-on: windows-latest
     steps:
