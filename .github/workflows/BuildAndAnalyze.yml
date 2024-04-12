@@ -1,6 +1,6 @@
 name: BuildAndAnalyze
 
-run-name: Build and Analyze [ ${{github.ref_name}} | ${{github.event_name}} ] by [ ${{github.actor}} ]
+run-name: Build and Analyze [ ${{github.run_number}} ]
 
 on: [push]
 
