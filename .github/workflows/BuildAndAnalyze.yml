@@ -33,6 +33,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v4
 
+#For Windows       
       - name: Choco install tools
         if: runner.os == 'Windows'
         uses: crazy-max/ghaction-chocolatey@v3
@@ -43,6 +44,21 @@ jobs:
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
           
+#For Linux
+      - name: Install PVS-Studio
+        if: runner.os != 'Windows'
+        run: |
+              if [ "$RUNNER_OS" == "Linux"]; then
+                wget -qO- https://cdn.pvs-studio.com/etc/pubkey.txt | \
+                sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/viva64.gpg
+                sudo wget -O /etc/apt/sources.list.d/viva64.list \
+                https://cdn.pvs-studio.com/etc/viva64.list
+                sudo apt-get update
+                sudo apt-get install pvs-studio
+              elif [ "$RUNNER_OS" == 'macos' ]; then
+                brew install viva64/pvs-studio/pvs-studio
+
+      
       - name: Activate PVS-Studio
         env:
           USER_NAME: ${{ secrets.PVS_USER_NAME }}
