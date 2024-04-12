@@ -5,8 +5,9 @@ run-name: ${{github.actor}} - static analysis
 on: [push]
 
 jobs:
-  build-analyze:
+  BuildAndAnalyze:
     runs-on: ${{matrix.config.os}}
+    name: "Build and analyze on ${{matrix.config.os}}"
     timeout-minutes: 30
     strategy:
       matrix:
@@ -21,14 +22,24 @@ jobs:
             }
 
           - {
-            name: "Linux",
-            os: "ubuntu-latest",
-            pvs_analyzer: "pvs-studio-analyzer",
-            pvs_converter: "plog-converter",
-            sln_file: "compile_commands.json",
-            pvs_log: "PVS-Studio.log",
-            pvs_sarif: "PVS-Studio.sarif"
+              name: "Linux",
+              os: "ubuntu-latest",
+              pvs_analyzer: "pvs-studio-analyzer",
+              pvs_converter: "plog-converter",
+              sln_file: "compile_commands.json",
+              pvs_log: "PVS-Studio.log",
+              pvs_sarif: "PVS-Studio.sarif"
            }
+
+          - {
+              name: "macOS",
+              os: "macOS-latest",
+              pvs_analyzer: "pvs-studio-analyzer",
+              pvs_converter: "plog-converter",
+              sln_file: "compile_commands.json",
+              pvs_log: "PVS-Studio.log",
+              pvs_sarif: "PVS-Studio.sarif"
+          }
     steps:
       - name: Check out
         uses: actions/checkout@v4
