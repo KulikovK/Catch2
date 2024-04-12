@@ -4,6 +4,13 @@ run-name: ${{github.actor}} - static analysis
 
 on: [push]
 
+env:
+  COMPILE_COMMANDS: "compile_commands.json"
+  PVS_LOG:          "PVS-Studio.log"
+  PVS_SARIF:        "PVS-Studio.sarif"
+  PVS_SUPPRESSION:  "catch2.suppress.json"
+  PVS_RULESCONFIG:  "catch2.pvsconfig"
+
 jobs:
   BuildAndAnalyze:
     runs-on: ${{matrix.config.os}}
@@ -16,21 +23,14 @@ jobs:
               name: "Windows",
               os: "windows-latest",
               pvs_analyzer: "C:/Program Files (x86)/PVS-Studio/CompilerCommandsAnalyzer.exe",
-              pvs_converter: "C:/Program Files (x86)/PVS-Studio/HtmlGenerator.exe",
-              pvs_log: "PVS-Studio.log",
-              pvs_sarif: "PVS-Studio.sarif",
-              pvs_suppression: "catch2.suppress.json"
+              pvs_converter: "C:/Program Files (x86)/PVS-Studio/HtmlGenerator.exe"
             }
 
           - {
               name: "Linux",
               os: "ubuntu-latest",
               pvs_analyzer: "pvs-studio-analyzer",
-              pvs_converter: "plog-converter",
-              sln_file: "compile_commands.json",
-              pvs_log: "PVS-Studio.log",
-              pvs_sarif: "PVS-Studio.sarif",
-              pvs_suppression: "catch2.suppress.json"
+              pvs_converter: "plog-converter"
            }
 
           - {
@@ -38,10 +38,6 @@ jobs:
               os: "macOS-latest",
               pvs_analyzer: "pvs-studio-analyzer",
               pvs_converter: "plog-converter",
-              sln_file: "compile_commands.json",
-              pvs_log: "PVS-Studio.log",
-              pvs_sarif: "PVS-Studio.sarif",
-              pvs_suppression: "catch2.suppress.json"
           }
     steps:
       - name: Check out
@@ -94,12 +90,13 @@ jobs:
         shell: bash
         env:
           SUPPRESS_FILE: "${{github.workspace}}/src/catch2.suppress.json"
-        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{github.workspace}}/build/compile_commands.json\" -o \"${{matrix.config.pvs_log}}\" -s \"${{env.SUPPRESS_FILE}}\" -j" 
+          COMPILE_COMMANDS_PATH: "${{github.workspace}}/build/${{env.COMPILE_COMMANDS}}"
+        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{env.COMPILE_COMMANDS_PATH}}\" -o \"${{env.PVS_LOG}}\" -s \"${{env.SUPPRESS_FILE}}\" -R \"${{env.PVS_RULESCONFIG}}\" -j" 
         working-directory: ${{github.workspace}}/build
       
       - name: Convert analysis reports
         shell: bash
-        run: "\"${{matrix.config.pvs_converter}}\" -t \"sarif\" -a \"all\" -o \"${{matrix.config.pvs_sarif}}\" \"${{matrix.config.pvs_log}}\""
+        run: "\"${{matrix.config.pvs_converter}}\" -t \"sarif\" -a \"all\" -o \"${{env.PVS_SARIF}}\" \"${{env.PVS_LOG}}\""
         working-directory: ${{github.workspace}}/build
 
       - name: Save analysis reports
@@ -113,5 +110,5 @@ jobs:
       - name: Publish static analysis report
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: "${{github.workspace}}/build/${{matrix.config.pvs_sarif}}"
+          sarif_file: "${{github.workspace}}/build/${{env.PVS_SARIF}}"
           category: "PVS-Studio_${{matrix.config.name}}"
