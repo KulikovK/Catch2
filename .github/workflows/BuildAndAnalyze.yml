@@ -16,21 +16,19 @@ jobs:
               os: "windows-latest",
               pvs_analyzer: "C:/Program Files (x86)/PVS-Studio/CompilerCommandsAnalyzer.exe",
               pvs_converter: "C:/Program Files (x86)/PVS-Studio/HtmlGenerator.exe",
-              blame_notifier: "C:/Program Files (x86)/PVS-Studio/BlameNotifier.exe",
               pvs_log: "PVS-Studio_Log.log",
               pvs_sarif: "PVS-Studio_Log.sarif"
             }
 
-          #- {
-          #  name: "Linux",
-          #  os: "ubuntu-latest",
-          #  pvs_analyzer: "pvs-studio-analyzer",
-          #  pvs_converter: "plog-converter",
-          #  blame_notifier: "blame-notofier",
-          #  sln_file: "compile_commands.json",
-          #  pvs_log: "PVS-Studio.log",
-          #  pvs_sarif: "PVS-Studio.sarif"
-          # }
+          - {
+            name: "Linux",
+            os: "ubuntu-latest",
+            pvs_analyzer: "pvs-studio-analyzer",
+            pvs_converter: "plog-converter",
+            sln_file: "compile_commands.json",
+            pvs_log: "PVS-Studio.log",
+            pvs_sarif: "PVS-Studio.sarif"
+           }
     steps:
       - name: Check out
         uses: actions/checkout@v4
@@ -42,13 +40,13 @@ jobs:
           args: install pvs-studio ninja
  
       - name: Initialize MSVC development environment
+        if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
           
       - name: Activate PVS-Studio
         env:
           USER_NAME: ${{ secrets.PVS_USER_NAME }}
           LIC_KEY: ${{ secrets.PVS_LIC_KEY }}
-        #run:  Start-Process -FilePath "${{ matrix.config.pvs_analyzer }}" -NoNewWindow -Wait -ArgumentList "credentials", "-u", "${{ env.USER_NAME }}", "-l", "${{env.LIC_KEY}}"
         shell: bash
         run: "\"${{matrix.config.pvs_analyzer}}\" credentials \"${{env.USER_NAME}}\" \"${{env.LIC_KEY}}\""
 
