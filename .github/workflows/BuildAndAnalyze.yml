@@ -7,7 +7,7 @@ on: [push]
 jobs:
   BuildAndAnalyze:
     runs-on: ${{matrix.config.os}}
-    name: "Build and analyze on ${{matrix.config.os}}"
+    name: "Build and analyze on ${{matrix.config.name}}"
     timeout-minutes: 30
     strategy:
       matrix:
@@ -47,7 +47,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v4
 
-#For Windows       
+#Only Windows       
       - name: Choco install tools
         if: runner.os == 'Windows'
         uses: crazy-max/ghaction-chocolatey@v3
@@ -58,7 +58,7 @@ jobs:
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
           
-#For Linux
+#Only Linux and macOS
       - name: Install PVS-Studio
         if: runner.os != 'Windows'
         run: |
@@ -97,15 +97,15 @@ jobs:
         run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{github.workspace}}/build/compile_commands.json\" -o \"${{matrix.config.pvs_log}}\" -s \"${{env.SUPPRESS_FILE}}\" -j" 
         working-directory: ${{github.workspace}}/build
       
-      - name: Convert analysis result
+      - name: Convert analysis reports
         shell: bash
         run: "\"${{matrix.config.pvs_converter}}\" -t \"sarif\" -a \"all\" -o \"${{matrix.config.pvs_sarif}}\" \"${{matrix.config.pvs_log}}\""
         working-directory: ${{github.workspace}}/build
 
-      - name: Save analysis result
+      - name: Save analysis reports
         uses: actions/upload-artifact@v4
         with:
-          name: StaticAnalysis-${{matrix.config.os}}
+          name: StaticAnalysis_${{matrix.config.name}}
           path: ${{github.workspace}}/build/PVS-Studio*
           retention-days: 7
           if-no-files-found: ignore
@@ -114,4 +114,4 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "${{github.workspace}}/build/${{matrix.config.pvs_sarif}}"
-          category: "PVS-Studio - ${{matrix.config.os}}"
+          category: "PVS-Studio_${{matrix.config.name}}"
