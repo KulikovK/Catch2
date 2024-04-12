@@ -106,4 +106,4 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "${{github.workspace}}/build/${{matrix.config.pvs_sarif}}"
-          category: PVS-Studio  
+          category: PVS-Studio - ${{matrix.config.os}} 
