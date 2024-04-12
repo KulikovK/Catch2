@@ -89,7 +89,7 @@ jobs:
 
       - name: Analyzer with PVS-Studio
         shell: bash
-        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{github.workspace}}/build/compile_commands.json\" -o \"${{matrix.config.pvs_log}}\" -j" 
+        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{github.workspace}}/build/compile_commands.json\" -o \"${{matrix.config.pvs_log}}\" -s \"${{github.workspace}}/src/catch2.suppress\" -j" 
         working-directory: ${{github.workspace}}/build
       
       - name: Convert Result
