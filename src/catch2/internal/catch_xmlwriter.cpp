@@ -158,7 +158,7 @@ namespace {
                     (!valid) ||
                     // Overlong encodings
                     (value < 0x80) ||
-                    (0x80 <= value && value < 0x800   && encBytes > 2) ||
+                    (0x80 <= value && value < 0x800   && encBytes > 2) || //-V728
                     (0x800 < value && value < 0x10000 && encBytes > 3) ||
                     // Encoded value out of range
                     (value >= 0x110000)
