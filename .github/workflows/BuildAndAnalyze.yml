@@ -18,7 +18,8 @@ jobs:
               pvs_analyzer: "C:/Program Files (x86)/PVS-Studio/CompilerCommandsAnalyzer.exe",
               pvs_converter: "C:/Program Files (x86)/PVS-Studio/HtmlGenerator.exe",
               pvs_log: "PVS-Studio_Log.log",
-              pvs_sarif: "PVS-Studio_Log.sarif"
+              pvs_sarif: "PVS-Studio_Log.sarif",
+              pvs_suppression: "catch2.suppress.json"
             }
 
           - {
@@ -28,7 +29,8 @@ jobs:
               pvs_converter: "plog-converter",
               sln_file: "compile_commands.json",
               pvs_log: "PVS-Studio.log",
-              pvs_sarif: "PVS-Studio.sarif"
+              pvs_sarif: "PVS-Studio.sarif",
+              pvs_suppression: "catch2.suppress.json"
            }
 
           - {
@@ -38,7 +40,8 @@ jobs:
               pvs_converter: "plog-converter",
               sln_file: "compile_commands.json",
               pvs_log: "PVS-Studio.log",
-              pvs_sarif: "PVS-Studio.sarif"
+              pvs_sarif: "PVS-Studio.sarif",
+              pvs_suppression: "catch2.suppress.json"
           }
     steps:
       - name: Check out
@@ -89,7 +92,9 @@ jobs:
 
       - name: Analyzer with PVS-Studio
         shell: bash
-        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{github.workspace}}/build/compile_commands.json\" -o \"${{matrix.config.pvs_log}}\" -s \"${{github.workspace}}/src/catch2.suppress\" -j" 
+        env:
+          SUPPRESS_FILE: "${{github.workflow}}/src/catch2.suppress.json"
+        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{github.workspace}}/build/compile_commands.json\" -o \"${{matrix.config.pvs_log}}\" -s \"${{env.SUPPRESS_FILE}}\" -j" 
         working-directory: ${{github.workspace}}/build
       
       - name: Convert Result
