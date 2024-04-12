@@ -57,6 +57,9 @@ jobs:
                 sudo apt-get install pvs-studio
               elif [ "$RUNNER_OS" == 'macos' ]; then
                 brew install viva64/pvs-studio/pvs-studio
+              else
+                echo "$RUNNER_OS not supported"
+                exit 1
 
       
       - name: Activate PVS-Studio
