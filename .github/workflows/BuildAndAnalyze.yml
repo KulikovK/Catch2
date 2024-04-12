@@ -97,11 +97,19 @@ jobs:
         run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{github.workspace}}/build/compile_commands.json\" -o \"${{matrix.config.pvs_log}}\" -s \"${{env.SUPPRESS_FILE}}\" -j" 
         working-directory: ${{github.workspace}}/build
       
-      - name: Convert Result
+      - name: Convert analysis result
         shell: bash
         run: "\"${{matrix.config.pvs_converter}}\" -t \"sarif\" -a \"all\" -o \"${{matrix.config.pvs_sarif}}\" \"${{matrix.config.pvs_log}}\""
         working-directory: ${{github.workspace}}/build
 
+      - name: Save analysis result
+        uses: actions/upload-artifact@v4
+        with:
+          name: PVS-Studio_Log
+          path: ${{github.workspace}}/build/PVS-Studio_Log*
+          retention-days: 7
+          if-no-files-found: ignore
+        
       - name: Publish static analysis report
         uses: github/codeql-action/upload-sarif@v3
         with:
