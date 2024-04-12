@@ -89,5 +89,5 @@ jobs:
       - name: Publish static analysis report
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: "${{github.workspace}}\\build\\${{matrix.config.pvs_sarif}}"
+          sarif_file: "${{github.workspace}}/build/${{matrix.config.pvs_sarif}}"
           category: PVS-Studio  
