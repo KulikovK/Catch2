@@ -56,7 +56,7 @@ jobs:
                 sudo apt-get update
                 sudo apt-get install pvs-studio ninja
               elif [ "$RUNNER_OS" == 'macos' ]; then
-                brew install viva64/pvs-studio/pvs-studio ninja
+                brew install viva64/pvs-studio/pvs-studio ninja-build
               else
                 echo "$RUNNER_OS not supported"
                 exit 1
