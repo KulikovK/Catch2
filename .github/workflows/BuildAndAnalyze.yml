@@ -105,7 +105,7 @@ jobs:
       - name: Save analysis result
         uses: actions/upload-artifact@v4
         with:
-          name: PVS-Studio_Log
+          name: StaticAnalisis-${{matrix.config.os}}
           path: ${{github.workspace}}/build/PVS-Studio_Log*
           retention-days: 7
           if-no-files-found: ignore
@@ -114,4 +114,4 @@ jobs:
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "${{github.workspace}}/build/${{matrix.config.pvs_sarif}}"
-          category: PVS-Studio - ${{matrix.config.os}} 
+          category: "PVS-Studio - ${{matrix.config.os}}"
