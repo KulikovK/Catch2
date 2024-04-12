@@ -48,7 +48,7 @@ jobs:
       - name: Install PVS-Studio
         if: runner.os != 'Windows'
         run: |
-              if [ "$RUNNER_OS" == "Linux"]; then
+              if [ "$RUNNER_OS" == "Linux" ]; then
                 wget -qO- https://cdn.pvs-studio.com/etc/pubkey.txt | \
                 sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/viva64.gpg
                 sudo wget -O /etc/apt/sources.list.d/viva64.list \
