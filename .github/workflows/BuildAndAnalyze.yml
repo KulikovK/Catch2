@@ -17,8 +17,8 @@ jobs:
               os: "windows-latest",
               pvs_analyzer: "C:/Program Files (x86)/PVS-Studio/CompilerCommandsAnalyzer.exe",
               pvs_converter: "C:/Program Files (x86)/PVS-Studio/HtmlGenerator.exe",
-              pvs_log: "PVS-Studio_Log.log",
-              pvs_sarif: "PVS-Studio_Log.sarif",
+              pvs_log: "PVS-Studio.log",
+              pvs_sarif: "PVS-Studio.sarif",
               pvs_suppression: "catch2.suppress.json"
             }
 
@@ -106,7 +106,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: StaticAnalisis-${{matrix.config.os}}
-          path: ${{github.workspace}}/build/PVS-Studio_Log*
+          path: ${{github.workspace}}/build/PVS-Studio*
           retention-days: 7
           if-no-files-found: ignore
         
