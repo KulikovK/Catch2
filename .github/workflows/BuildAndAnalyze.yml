@@ -1,6 +1,6 @@
 name: BuildAndAnalyze
 
-run-name: ${{github.sha}} - static analysis
+run-name: Analyze and build [${{github.ref_name}} / ${{github.event_name}}] by ${{github.actor}}
 
 on: [push]
 
@@ -14,7 +14,7 @@ env:
 jobs:
   BuildAndAnalyze:
     runs-on: ${{matrix.config.os}}
-    name: "Build and analyze on ${{matrix.config.name}}"
+    name: "${{matrix.config.name}}"
     timeout-minutes: 30
     strategy:
       fail-fast: false
