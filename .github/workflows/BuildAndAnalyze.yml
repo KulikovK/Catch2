@@ -1,6 +1,6 @@
 name: BuildAndAnalyze
 
-run-name: ${{github.actor}} - static analysis
+run-name: ${{github.sha}} - static analysis
 
 on: [push]
 
