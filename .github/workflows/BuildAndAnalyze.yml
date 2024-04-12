@@ -97,10 +97,11 @@ jobs:
       
       - name: Convert analysis reports
         shell: bash
-        run: "\"${{matrix.config.pvs_converter}}\" -t \"sarif\" -a \"all\" -o \"${{env.PVS_SARIF}}\" \"${{env.PVS_LOG}}\""
+        run: "\"${{matrix.config.pvs_converter}}\" -t \"sarif\" -a \"all\" -w -o \"${{env.PVS_SARIF}}\" \"${{env.PVS_LOG}}\""
         working-directory: ${{github.workspace}}/build
 
       - name: Save analysis reports
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: StaticAnalysis_${{matrix.config.name}}
@@ -109,6 +110,7 @@ jobs:
           if-no-files-found: ignore
         
       - name: Publish static analysis report
+        if: '!cancelled()'
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "${{github.workspace}}/build/${{env.PVS_SARIF}}"
