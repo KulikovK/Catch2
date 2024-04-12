@@ -28,7 +28,7 @@ namespace {
     bool almostEqualUlps(FP lhs, FP rhs, uint64_t maxUlpDiff) {
         // Comparison with NaN should always be false.
         // This way we can rule it out before getting into the ugly details
-        if (Catch::isnan(lhs) || Catch::isnan(rhs)) {
+        if (Catch::isnan(lhs) || Catch::isnan(lhs)) {
             return false;
         }
 

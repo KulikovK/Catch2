@@ -6,6 +6,7 @@
 
 // SPDX-License-Identifier: BSL-1.0
 #include <catch2/catch_totals.hpp>
+#include <type_traits>
 
 namespace Catch {
 
