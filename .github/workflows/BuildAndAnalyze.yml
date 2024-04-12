@@ -93,7 +93,7 @@ jobs:
       - name: Analyzer with PVS-Studio
         shell: bash
         env:
-          SUPPRESS_FILE: "${{github.workflow}}/src/catch2.suppress.json"
+          SUPPRESS_FILE: "${{github.workspace}}/src/catch2.suppress.json"
         run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{github.workspace}}/build/compile_commands.json\" -o \"${{matrix.config.pvs_log}}\" -s \"${{env.SUPPRESS_FILE}}\" -j" 
         working-directory: ${{github.workspace}}/build
       
