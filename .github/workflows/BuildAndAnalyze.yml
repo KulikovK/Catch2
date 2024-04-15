@@ -5,11 +5,11 @@ run-name: Build and Analyze [ ${{github.run_number}} ]
 on: [push]
 
 env:
-  COMPILE_COMMANDS: "compile_commands.json"
-  PVS_LOG:          "PVS-Studio.log"
-  PVS_SARIF:        "PVS-Studio.sarif"
-  PVS_SUPPRESSION:  "catch2.suppress.json"
-  PVS_RULESCONFIG:  "catch2.pvsconfig"
+  COMPILE_COMMANDS:     "compile_commands.json"
+  PVS_LOG:              "PVS-Studio.log"
+  PVS_SARIF:            "PVS-Studio.sarif"
+  SUPPRESS_FILE_NAME:   "catch2.suppress.json"
+  PVS_CONFIG_FILE_NAME: "catch2.pvsconfig"
 
 jobs:
   BuildAndAnalyze:
@@ -85,15 +85,16 @@ jobs:
         run:  cmake -G "Ninja" -DCMAKE_EXPORT_COMPILE_COMMANDS=On -S "${{ github.workspace }}" -B "${{github.workspace}}/build"
 
       - name: Build 
-        run:  cmake --build "${{github.workspace}}/build"
+        run:  cmake --build "${{github.workspace}}/build" -j
 
       - name: Analyzer with PVS-Studio
         shell: bash
         env:
-          SUPPRESS_FILE: "${{github.workspace}}/src/${{env.PVS_SUPPRESSION}}"
-          RULESCFG_PATH: "${{github.workspace}}/src/${{env.PVS_RULESCONFIG}}"
+          SUPPRESS_FILE_PATH:    "${{github.workspace}}/src/${{env.SUPPRESS_FILE_NAME}}"
+          PVSCONFIG_PATH:        "${{github.workspace}}/src/${{env.PVS_CONFIG_FILE_NAME}}"
           COMPILE_COMMANDS_PATH: "${{github.workspace}}/build/${{env.COMPILE_COMMANDS}}"
-        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{env.COMPILE_COMMANDS_PATH}}\" -o \"${{env.PVS_LOG}}\" -s \"${{env.SUPPRESS_FILE}}\" -R \"${{env.PVS_RULESCONFIG}}\" -j" 
+          
+        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{env.COMPILE_COMMANDS_PATH}}\" -o \"${{env.PVS_LOG}}\" -s \"${{env.SUPPRESS_FILE_PATH}}\" -R \"${{env.PVSCONFIG_PATH}}\" -j" 
         working-directory: ${{github.workspace}}/build
       
       - name: Convert analysis reports
