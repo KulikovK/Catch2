@@ -43,7 +43,7 @@ namespace Catch {
         template <typename T>
         inline void keep_memory(T* p) {
             // thanks @milleniumbug
-            *reinterpret_cast<char volatile*>(p) = *reinterpret_cast<char const volatile*>(p);
+            *reinterpret_cast<char volatile*>(p) = *reinterpret_cast<char const volatile*>(p); //-V1048 //-VH"564842899"
         }
         // TODO equivalent keep_memory()
 #if defined(_MSVC_VER)

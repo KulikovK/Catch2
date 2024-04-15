@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "primary": false,
+  "warnings": [
+    {
+      "CodeCurrent": 1114208416,
+      "CodeNext": 1026984120,
+      "CodePrev": 83202207,
+      "ErrorCode": "V636",
+      "FileName": "catch_stats.cpp",
+      "Message": "The '(count - _) * k' expression was implicitly cast from 'ptrdiff_t' type to 'double' type. Consider utilizing an explicit type cast to avoid overflow. An example: double A = (double)(X) * Y;."
+    }
+  ]
+}

@@ -39,7 +39,7 @@ namespace Catch {
         // to avoid paying the call overhead in debug mode.
         if ( !Context::currentContext ) { Context::createContext(); }
         // NOLINTNEXTLINE(clang-analyzer-core.uninitialized.UndefReturn)
-        return *Context::currentContext;
+        return *Context::currentContext; //-V1004 //-VH"3302285006"
     }
 
     void cleanUpContext();
