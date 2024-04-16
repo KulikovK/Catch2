@@ -1,7 +1,4 @@
 name: BuildAndAnalyze
-
-run-name: Build and Analyze [ ${{github.run_number}} ]
-
 on: [push]
 
 # Global environment variable
