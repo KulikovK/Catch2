@@ -73,7 +73,7 @@ jobs:
                 exit 1
               fi
 
-      
+#Common      
       - name: Activate PVS-Studio
         env:
           USER_NAME: ${{ secrets.PVS_USER_NAME }}
@@ -93,7 +93,7 @@ jobs:
           SUPPRESS_FILE_PATH:    "${{github.workspace}}/src/${{env.SUPPRESS_FILE_NAME}}"
           PVSCONFIG_PATH:        "${{github.workspace}}/src/${{env.PVS_CONFIG_FILE_NAME}}"
           COMPILE_COMMANDS_PATH: "${{github.workspace}}/build/${{env.COMPILE_COMMANDS}}"
-          
+
         run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{env.COMPILE_COMMANDS_PATH}}\" -o \"${{env.PVS_LOG}}\" -s \"${{env.SUPPRESS_FILE_PATH}}\" -R \"${{env.PVSCONFIG_PATH}}\" -j" 
         working-directory: ${{github.workspace}}/build
       
@@ -109,7 +109,6 @@ jobs:
           name: StaticAnalysis_${{matrix.config.name}}
           path: ${{github.workspace}}/build/PVS-Studio*
           retention-days: 7
-          if-no-files-found: ignore
         
       - name: Publish static analysis report
         if: '!cancelled()'
