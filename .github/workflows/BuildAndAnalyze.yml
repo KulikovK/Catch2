@@ -4,6 +4,7 @@ run-name: Build and Analyze [ ${{github.run_number}} ]
 
 on: [push]
 
+# Global environment variable
 env:
   COMPILE_COMMANDS:     "compile_commands.json"
   PVS_LOG:              "PVS-Studio.log"
@@ -12,14 +13,14 @@ env:
   PVS_CONFIG_FILE_NAME: "catch2.pvsconfig"
 
 jobs:
-  BuildAndAnalyze:
+  BuildAndAnalyze:  
     runs-on: ${{matrix.config.os}}
     name: "${{matrix.config.name}}"
     timeout-minutes: 30
     strategy:
       fail-fast: false
       matrix:
-        config:
+        config:  # Configure os-scecific 
           - {
               name: "Windows",
               os: "windows-latest",
@@ -44,7 +45,7 @@ jobs:
       - name: Check out
         uses: actions/checkout@v4
 
-#Only Windows       
+#For Windows (Install PVS-Studio and Ninja witch chiocolatey)      
       - name: Choco install tools
         if: runner.os == 'Windows'
         uses: crazy-max/ghaction-chocolatey@v3
@@ -55,7 +56,7 @@ jobs:
         if: runner.os == 'Windows'
         uses: ilammy/msvc-dev-cmd@v1
           
-#Only Linux and macOS
+#For Linux and macOS  (Install PVS-Studio and Ninja )
       - name: Install PVS-Studio
         if: runner.os != 'Windows'
         run: |
@@ -73,7 +74,7 @@ jobs:
                 exit 1
               fi
 
-#Common      
+# Record PVS-Studio license   
       - name: Activate PVS-Studio
         env:
           USER_NAME: ${{ secrets.PVS_USER_NAME }}
@@ -81,12 +82,15 @@ jobs:
         shell: bash
         run: "\"${{matrix.config.pvs_analyzer}}\" credentials \"${{env.USER_NAME}}\" \"${{env.LIC_KEY}}\""
 
+# Configure cmake cache
       - name: Configure
         run:  cmake -G "Ninja" -DCMAKE_EXPORT_COMPILE_COMMANDS=On -S "${{ github.workspace }}" -B "${{github.workspace}}/build"
 
+# Checking build         
       - name: Build 
         run:  cmake --build "${{github.workspace}}/build" -j
 
+# Run static analysis with PVS-Studio        
       - name: Analyzer with PVS-Studio
         shell: bash
         env:
@@ -96,12 +100,14 @@ jobs:
 
         run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{env.COMPILE_COMMANDS_PATH}}\" -o \"${{env.PVS_LOG}}\" -s \"${{env.SUPPRESS_FILE_PATH}}\" -R \"${{env.PVSCONFIG_PATH}}\" -j" 
         working-directory: ${{github.workspace}}/build
-      
+
+# Convert analysis results to SARIF format         
       - name: Convert analysis reports
         shell: bash
         run: "\"${{matrix.config.pvs_converter}}\" -t \"sarif\" -a \"all\" -w -o \"${{env.PVS_SARIF}}\" \"${{env.PVS_LOG}}\""
         working-directory: ${{github.workspace}}/build
 
+# Save artifacts        
       - name: Save analysis reports
         if: failure()
         uses: actions/upload-artifact@v4
@@ -109,7 +115,8 @@ jobs:
           name: StaticAnalysis_${{matrix.config.name}}
           path: ${{github.workspace}}/build/PVS-Studio*
           retention-days: 7
-        
+
+# Upload analysis result to GitHub.
       - name: Publish static analysis report
         if: '!cancelled()'
         uses: github/codeql-action/upload-sarif@v3
