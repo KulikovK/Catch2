@@ -1,5 +1,5 @@
 name: BuildAndAnalyze
-on: [push]
+on: [push, workflow_dispatch]
 
 # Global environment variable
 env:
