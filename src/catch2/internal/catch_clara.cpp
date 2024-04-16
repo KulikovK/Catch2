@@ -223,7 +223,7 @@ namespace Catch {
             if (tokens &&
                 tokens->type == Detail::TokenType::Option) {
                 auto const& token = *tokens;
-                if (isMatch(token.token)) {
+                if (isMatch(token.token)) { //-V1051 //-VH"1497589517"
                     if (m_ref->isFlag()) {
                         auto flagRef =
                             static_cast<Detail::BoundFlagRefBase*>(

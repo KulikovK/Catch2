@@ -83,13 +83,13 @@ namespace Catch {
          */
         constexpr ExtendedMultResult<std::uint64_t>
         extendedMultPortable(std::uint64_t lhs, std::uint64_t rhs) {
-#define CarryBits( x ) ( x >> 32 )
+#define CarryBits( x ) (x >> 32 )
 #define Digits( x ) ( x & 0xFF'FF'FF'FF )
             std::uint64_t lhs_low = Digits( lhs );
             std::uint64_t rhs_low = Digits( rhs );
             std::uint64_t low_low = ( lhs_low * rhs_low );
             std::uint64_t high_high = CarryBits( lhs ) * CarryBits( rhs );
-            //std::uint64_t test = CarryBits(rhs << 0x00001001 );
+            std::uint64_t simple = CarryBits(lhs&0xAAA);
 
             // We add in carry bits from low-low already
             std::uint64_t high_low =

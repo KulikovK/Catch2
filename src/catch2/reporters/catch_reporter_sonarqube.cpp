@@ -36,7 +36,7 @@ namespace Catch {
 
         xml.writeComment( createMetadataString( *m_config ) );
         xml.startElement("testExecutions");
-        xml.writeAttribute("version"_sr, '1');
+        xml.writeAttribute("version"_sr, '1'); //-V601 //-VH"4101901782"
     }
 
     void SonarQubeReporter::writeRun( TestRunNode const& runNode ) {

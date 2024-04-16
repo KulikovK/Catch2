@@ -205,56 +205,56 @@ namespace Catch {
             static_assert(always_false<T>::value,
             "chained comparisons are not supported inside assertions, "
             "wrap the expression inside parentheses, or decompose it");
-        }
+        } //-V591 //-VH"125"
 
         template<typename T>
         auto operator || ( T ) const -> BinaryExpr<LhsT, RhsT const&> const {
             static_assert(always_false<T>::value,
             "chained comparisons are not supported inside assertions, "
             "wrap the expression inside parentheses, or decompose it");
-        }
+        } //-V591 //-VH"125"
 
         template<typename T>
         auto operator == ( T ) const -> BinaryExpr<LhsT, RhsT const&> const {
             static_assert(always_false<T>::value,
             "chained comparisons are not supported inside assertions, "
             "wrap the expression inside parentheses, or decompose it");
-        }
+        } //-V591 //-VH"125"
 
         template<typename T>
         auto operator != ( T ) const -> BinaryExpr<LhsT, RhsT const&> const {
             static_assert(always_false<T>::value,
             "chained comparisons are not supported inside assertions, "
             "wrap the expression inside parentheses, or decompose it");
-        }
+        } //-V591 //-VH"125"
 
         template<typename T>
         auto operator > ( T ) const -> BinaryExpr<LhsT, RhsT const&> const {
             static_assert(always_false<T>::value,
             "chained comparisons are not supported inside assertions, "
             "wrap the expression inside parentheses, or decompose it");
-        }
+        } //-V591 //-VH"125"
 
         template<typename T>
         auto operator < ( T ) const -> BinaryExpr<LhsT, RhsT const&> const {
             static_assert(always_false<T>::value,
             "chained comparisons are not supported inside assertions, "
             "wrap the expression inside parentheses, or decompose it");
-        }
+        } //-V591 //-VH"125"
 
         template<typename T>
         auto operator >= ( T ) const -> BinaryExpr<LhsT, RhsT const&> const {
             static_assert(always_false<T>::value,
             "chained comparisons are not supported inside assertions, "
             "wrap the expression inside parentheses, or decompose it");
-        }
+        } //-V591 //-VH"125"
 
         template<typename T>
         auto operator <= ( T ) const -> BinaryExpr<LhsT, RhsT const&> const {
             static_assert(always_false<T>::value,
             "chained comparisons are not supported inside assertions, "
             "wrap the expression inside parentheses, or decompose it");
-        }
+        } //-V591 //-VH"125"
     };
 
     template<typename LhsT>
@@ -413,14 +413,14 @@ namespace Catch {
             static_assert(always_false<RhsT>::value,
             "operator&& is not supported inside assertions, "
             "wrap the expression inside parentheses, or decompose it");
-        }
+        } //-V591 //-VH"125"
 
         template<typename RhsT>
         friend auto operator || ( ExprLhs &&, RhsT && ) -> BinaryExpr<LhsT, RhsT const&> {
             static_assert(always_false<RhsT>::value,
             "operator|| is not supported inside assertions, "
             "wrap the expression inside parentheses, or decompose it");
-        }
+        } //-V591 //-VH"125"
 
         constexpr auto makeUnaryExpr() const -> UnaryExpr<LhsT> {
             return UnaryExpr<LhsT>{ m_lhs };

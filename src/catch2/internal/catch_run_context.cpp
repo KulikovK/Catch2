@@ -517,9 +517,9 @@ namespace Catch {
                 invokeActiveTestCase();
             }
             duration = timer.getElapsedSeconds();
-        } CATCH_CATCH_ANON (TestFailureException&) {
+        } CATCH_CATCH_ANON (TestFailureException&) { //-V565 //-VH"3634583471"
             // This just means the test was aborted due to failure
-        } CATCH_CATCH_ANON (TestSkipException&) {
+        } CATCH_CATCH_ANON (TestSkipException&) { //-V565 //-VH"3676057126"
             // This just means the test was explicitly skipped
         } CATCH_CATCH_ALL {
             // Under CATCH_CONFIG_FAST_COMPILE, unexpected exceptions under REQUIRE assertions

@@ -40,10 +40,10 @@ namespace Catch {
             }
             return static_cast<unsigned int>(ret);
         }
-        CATCH_CATCH_ANON( std::invalid_argument const& ) {
+        CATCH_CATCH_ANON( std::invalid_argument const& ) { //-V565 //-VH"1806297109"
             // no conversion could be performed
         }
-        CATCH_CATCH_ANON( std::out_of_range const& ) {
+        CATCH_CATCH_ANON( std::out_of_range const& ) { //-V565 //-VH"1188760154"
             // the input does not fit into an unsigned long long
         }
         return {};

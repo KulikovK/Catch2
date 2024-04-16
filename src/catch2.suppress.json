@@ -203,14 +203,6 @@
       "Message": "Functions should contain neither direct nor indirect recursion call. Check lines: _, _."
     },
     {
-      "CodeCurrent": 1497589517,
-      "CodeNext": 47563421,
-      "CodePrev": 662887453,
-      "ErrorCode": "V1051",
-      "FileName": "catch_clara.cpp",
-      "Message": "Consider checking for misprints. It's possible that the 'token' should be used inside 'isMatch' function."
-    },
-    {
       "CodeCurrent": 442458100,
       "CodeNext": 2108790303,
       "CodePrev": 0,
@@ -1681,22 +1673,6 @@
       "ErrorCode": "V2569",
       "FileName": "catch_decomposer.hpp",
       "Message": "The operator '&&' should not be overloaded."
-    },
-    {
-      "CodeCurrent": 125,
-      "CodeNext": 0,
-      "CodePrev": 3067138774,
-      "ErrorCode": "V591",
-      "FileName": "catch_decomposer.hpp",
-      "Message": "Non-void function should return a value."
-    },
-    {
-      "CodeCurrent": 125,
-      "CodeNext": 193,
-      "CodePrev": 3067138774,
-      "ErrorCode": "V591",
-      "FileName": "catch_decomposer.hpp",
-      "Message": "Non-void function should return a value."
     },
     {
       "CodeCurrent": 968365521,
@@ -3209,22 +3185,6 @@
       "ErrorCode": "V2506",
       "FileName": "catch_parse_numbers.cpp",
       "Message": "A function should have a single point of exit at the end."
-    },
-    {
-      "CodeCurrent": 1188760154,
-      "CodeNext": 853254953,
-      "CodePrev": 125,
-      "ErrorCode": "V565",
-      "FileName": "catch_parse_numbers.cpp",
-      "Message": "An empty exception handler. Silent suppression of exceptions can hide the presence of bugs in source code during testing."
-    },
-    {
-      "CodeCurrent": 1806297109,
-      "CodeNext": 1454118079,
-      "CodePrev": 125,
-      "ErrorCode": "V565",
-      "FileName": "catch_parse_numbers.cpp",
-      "Message": "An empty exception handler. Silent suppression of exceptions can hide the presence of bugs in source code during testing."
     },
     {
       "CodeCurrent": 6384642,
@@ -5995,14 +5955,6 @@
       "Message": "The 'static' storage class specifier should be used in all declarations of functions that have internal linkage."
     },
     {
-      "CodeCurrent": 4101901782,
-      "CodeNext": 125,
-      "CodePrev": 3600178798,
-      "ErrorCode": "V601",
-      "FileName": "catch_reporter_sonarqube.cpp",
-      "Message": "The '_' value is implicitly cast to the bool type. Inspect the second argument."
-    },
-    {
       "CodeCurrent": 5519081,
       "CodeNext": 125,
       "CodePrev": 99748249,
@@ -7433,22 +7385,6 @@
       "ErrorCode": "V2600",
       "FileName": "catch_run_context.cpp",
       "Message": "The function with the 'remove' name should not be used."
-    },
-    {
-      "CodeCurrent": 3634583471,
-      "CodeNext": 1474996226,
-      "CodePrev": 1950623932,
-      "ErrorCode": "V565",
-      "FileName": "catch_run_context.cpp",
-      "Message": "An empty exception handler. Silent suppression of exceptions can hide the presence of bugs in source code during testing."
-    },
-    {
-      "CodeCurrent": 3676057126,
-      "CodeNext": 3589687423,
-      "CodePrev": 1474996226,
-      "ErrorCode": "V565",
-      "FileName": "catch_run_context.cpp",
-      "Message": "An empty exception handler. Silent suppression of exceptions can hide the presence of bugs in source code during testing."
     },
     {
       "CodeCurrent": 3072315853,

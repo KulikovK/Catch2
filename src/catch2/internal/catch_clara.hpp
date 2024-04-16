@@ -207,7 +207,7 @@ namespace Catch {
                         new ( &m_value ) T( other.m_value );
                     return *this;
                 }
-                ResultValueBase& operator=( ResultValueBase&& other ) {
+                ResultValueBase& operator=( ResultValueBase&& other ) { //-V794 //-VH"3116390688"
                     if ( m_type == ResultType::Ok ) m_value.~T();
                     ResultBase::operator=( other );
                     if ( m_type == ResultType::Ok )
