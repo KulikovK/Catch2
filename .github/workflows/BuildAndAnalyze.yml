@@ -1,5 +1,16 @@
 name: BuildAndAnalyze
-on: [push, workflow_dispatch]
+on: 
+  push:
+    branches:
+      - devel
+    paths:
+      - '**.hpp'
+      - '**.cpp'
+      - '**.cxx'
+      - '**.cc'
+      - '**.c'
+      - '**.h'
+  workflow_dispatch:
 
 # Global environment variable
 env:
