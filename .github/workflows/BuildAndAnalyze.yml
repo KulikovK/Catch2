@@ -111,7 +111,7 @@ jobs:
           retention-days: 7
         
       - name: Publish static analysis report
-        if: ${{'!cancelled()' && runner.os == 'Linux'}}
+        if: '!cancelled()'
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: "${{github.workspace}}/build/${{env.PVS_SARIF}}"
