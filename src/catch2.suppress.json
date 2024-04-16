@@ -3003,14 +3003,6 @@
       "Message": "The 'ScopedMessage' class implements a move constructor, but lacks the move assignment operator. It is dangerous to use such a class."
     },
     {
-      "CodeCurrent": 4072608485,
-      "CodeNext": 125,
-      "CodePrev": 2843202828,
-      "ErrorCode": "V2547",
-      "FileName": "catch_optimizer.hpp",
-      "Message": "The return value of non-void function 'operator()' should be used."
-    },
-    {
       "CodeCurrent": 1688461990,
       "CodeNext": 193,
       "CodePrev": 2638293,
