@@ -31,7 +31,7 @@ namespace Catch {
 #    pragma GCC diagnostic push
 #    pragma GCC diagnostic ignored "-Wfloat-equal"
 #endif
-        bool directCompare( float lhs, float rhs ) { return lhs == rhs; }
+        bool directCompare( float lhs, float rhs ) { return lhs == rhs; } //-V550
         bool directCompare( double lhs, double rhs ) { return lhs == rhs; } //-V550 //-VH"3656163552"
 #if defined( __GNUC__ ) || defined( __clang__ )
 #    pragma GCC diagnostic pop
