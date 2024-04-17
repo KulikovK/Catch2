@@ -117,7 +117,7 @@ jobs:
     runs-on: 'ubuntu-latest'
 
     env:
-      PREFIX_LOG_NAME: 'PVS-Studio'
+      PREFIX_LOG_NAME: 'StaticAnalysis'
       CONVERTER:       'plog-converter'
     steps:
       - name: Upload artifacts
@@ -126,7 +126,16 @@ jobs:
           pattern: 'StaticAnalysis_*'
           path: '${{github.workspace}}/Merge'
  
-      - name: Merge Analysis result
+      - name: initialize
+        shell: bash 
+        run: wget -qO- https://cdn.pvs-studio.com/etc/pubkey.txt | \
+             sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/viva64.gpg
+             sudo wget -O /etc/apt/sources.list.d/viva64.list \
+             https://cdn.pvs-studio.com/etc/viva64.list
+             sudo apt-get update
+             sudo apt-get install pvs-studio 
+   
+      - name: Merge Analysis Result
         shell: bash
         env:
           LOG_LIST: "${{env.PREFIX_LOG_NAME}}_Windows.log ${{env.PREFIX_LOG_NAME}}_Linux.log ${{env.PREFIX_LOG_NAME}}_macOS.log"
