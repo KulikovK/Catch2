@@ -1579,14 +1579,6 @@
       "Message": "The string literal should not decay to a pointer to char. Consider inspecting the first function argument."
     },
     {
-      "CodeCurrent": 1802525033,
-      "CodeNext": 193,
-      "CodePrev": 2715570,
-      "ErrorCode": "V536",
-      "FileName": "catch_console_colour.cpp",
-      "Message": "Be advised that the utilized constant value is represented by an octal form. Oct: '\\_', Dec: _."
-    },
-    {
       "CodeCurrent": 17545,
       "CodeNext": 6928,
       "CodePrev": 389843,
@@ -2961,14 +2953,6 @@
       "ErrorCode": "V2578",
       "FileName": "catch_message.cpp",
       "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the second function argument."
-    },
-    {
-      "CodeCurrent": 18756277,
-      "CodeNext": 5816,
-      "CodePrev": 0,
-      "ErrorCode": "V690",
-      "FileName": "catch_message.hpp",
-      "Message": "The 'ScopedMessage' class implements a move constructor, but lacks the move assignment operator. It is dangerous to use such a class."
     },
     {
       "CodeCurrent": 1688461990,
@@ -5707,14 +5691,6 @@
       "Message": "The 'static' storage class specifier should be used in all declarations of functions that have internal linkage."
     },
     {
-      "CodeCurrent": 2463250803,
-      "CodeNext": 1613615908,
-      "CodePrev": 2691945312,
-      "ErrorCode": "V601",
-      "FileName": "catch_reporter_junit.cpp",
-      "Message": "The result of '-' operator is implicitly cast to the bool type. Inspect the second argument."
-    },
-    {
       "CodeCurrent": 1589644427,
       "CodeNext": 89368061,
       "CodePrev": 3666879820,
@@ -8097,14 +8073,6 @@
       "ErrorCode": "V2578",
       "FileName": "catch_stats.cpp",
       "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the second function argument."
-    },
-    {
-      "CodeCurrent": 1114208416,
-      "CodeNext": 1026984120,
-      "CodePrev": 83202207,
-      "ErrorCode": "V636",
-      "FileName": "catch_stats.cpp",
-      "Message": "The '(count - _) * k' expression was implicitly cast from 'ptrdiff_t' type to 'double' type. Consider utilizing an explicit type cast to avoid overflow. An example: double A = (double)(X) * Y;."
     },
     {
       "CodeCurrent": 2750511999,
