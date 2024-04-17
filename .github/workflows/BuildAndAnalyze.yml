@@ -113,7 +113,7 @@ jobs:
           retention-days: 7
 
   UploadSataticAnalysisResult:
-    needs: BuildAndAnalyze
+    if: ${{ always() }}
     runs-on: 'ubuntu-latest'
 
     env:
@@ -128,7 +128,8 @@ jobs:
  
       - name: initialize
         shell: bash 
-        run: wget -qO- https://cdn.pvs-studio.com/etc/pubkey.txt | \
+        run: |
+             wget -qO- https://cdn.pvs-studio.com/etc/pubkey.txt | \
              sudo gpg --dearmor -o /etc/apt/trusted.gpg.d/viva64.gpg
              sudo wget -O /etc/apt/sources.list.d/viva64.list \
              https://cdn.pvs-studio.com/etc/viva64.list
