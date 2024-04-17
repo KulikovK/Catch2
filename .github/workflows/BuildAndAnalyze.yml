@@ -8,7 +8,7 @@ on:
 # Global environment variable
 env:
   COMPILE_COMMANDS:     "compile_commands.json"
-  PVS_LOG:              "PVS-Studio.log"
+  PVS_LOG:              "PVS-Studio"
   PVS_SARIF:            "PVS-Studio.sarif"
   SUPPRESS_FILE_NAME:   "catch2.suppress.json"
   PVS_CONFIG_FILE_NAME: "catch2.pvsconfig"
@@ -98,29 +98,50 @@ jobs:
           SUPPRESS_FILE_PATH:    "${{github.workspace}}/src/${{env.SUPPRESS_FILE_NAME}}"
           PVSCONFIG_PATH:        "${{github.workspace}}/src/${{env.PVS_CONFIG_FILE_NAME}}"
           COMPILE_COMMANDS_PATH: "${{github.workspace}}/build/${{env.COMPILE_COMMANDS}}"
+          LOG:                   "${{env.PVS_LOG}}_${{matrix.config.name}}.log"
 
-        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{env.COMPILE_COMMANDS_PATH}}\" -o \"${{env.PVS_LOG}}\" -s \"${{env.SUPPRESS_FILE_PATH}}\" -R \"${{env.PVSCONFIG_PATH}}\" -j" 
-        working-directory: ${{github.workspace}}/build
-
-# Convert analysis results to SARIF format         
-      - name: Convert analysis reports
-        shell: bash
-        run: "\"${{matrix.config.pvs_converter}}\" -t \"sarif\" -a \"all\" -w -o \"${{env.PVS_SARIF}}\" \"${{env.PVS_LOG}}\""
+        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{env.COMPILE_COMMANDS_PATH}}\" -o \"${{env.LOG}}_\" -s \"${{env.SUPPRESS_FILE_PATH}}\" -R \"${{env.PVSCONFIG_PATH}}\" -r \"${{github.workspace}}\" -j" 
         working-directory: ${{github.workspace}}/build
 
 # Save artifacts        
       - name: Save analysis reports
-        if: failure()
+        if: ${{always()}}
         uses: actions/upload-artifact@v4
         with:
           name: StaticAnalysis_${{matrix.config.name}}
           path: ${{github.workspace}}/build/PVS-Studio*
           retention-days: 7
 
-# Upload analysis result to GitHub.
+  UploadSataticAnalysisResult:
+    needs: BuildAndAnalyze
+    runs-on: 'ubuntu-latest'
+
+    env:
+      PREFIX_LOG_NAME: 'PVS-Studio'
+      CONVERTER:       'plog-converter'
+    steps:
+      - name: Upload artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: 'PVS-Studio_*'
+          path: '${{github.workspace}}/Merge'
+ 
+      - name: Merge Analysis result
+        shell: bash
+        env:
+          LOG_LIST: "${{env.PREFIX_LOG_NAME}}_Windows.log ${{env.PREFIX_LOG_NAME}}_Linux.log ${{env.PREFIX_LOG_NAME}}_macOS.log"
+        run: "\"${{env.CONVERTER}}\" -t \"sarif\" -a \"all\" -w -o \"${{env.PVS_SARIF}}\" \"${{env.LOG_LIST}}\""
+        working-directory: "${{github.workspace}}/Merge"
+
+        # Upload analysis result to GitHub.
       - name: Publish static analysis report
         if: '!cancelled()'
         uses: github/codeql-action/upload-sarif@v3
         with:
-          sarif_file: "${{github.workspace}}/build/${{env.PVS_SARIF}}"
-          category: "PVS-Studio_${{matrix.config.name}}"
+          sarif_file: "${{github.workspace}}/Merge/${{env.PVS_SARIF}}"
+          category: "PVS-Studio"
+
+
+     
+
+
