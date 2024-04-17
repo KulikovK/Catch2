@@ -8,7 +8,7 @@ on:
 # Global environment variable
 env:
   COMPILE_COMMANDS:     "compile_commands.json"
-  PVS_LOG:              "PVS-Studio"
+  PVS_LOG:              "PVS-Studio.log"
   PVS_SARIF:            "PVS-Studio.sarif"
   SUPPRESS_FILE_NAME:   "catch2.suppress.json"
   PVS_CONFIG_FILE_NAME: "catch2.pvsconfig"
@@ -98,9 +98,8 @@ jobs:
           SUPPRESS_FILE_PATH:    "${{github.workspace}}/src/${{env.SUPPRESS_FILE_NAME}}"
           PVSCONFIG_PATH:        "${{github.workspace}}/src/${{env.PVS_CONFIG_FILE_NAME}}"
           COMPILE_COMMANDS_PATH: "${{github.workspace}}/build/${{env.COMPILE_COMMANDS}}"
-          LOG:                   "${{env.PVS_LOG}}_${{matrix.config.name}}.log"
 
-        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{env.COMPILE_COMMANDS_PATH}}\" -o \"${{env.LOG}}\" -s \"${{env.SUPPRESS_FILE_PATH}}\" -R \"${{env.PVSCONFIG_PATH}}\" -r \"${{github.workspace}}\" -j" 
+        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{env.COMPILE_COMMANDS_PATH}}\" -o \"${{env.PVS_LOG}}\" -s \"${{env.SUPPRESS_FILE_PATH}}\" -R \"${{env.PVSCONFIG_PATH}}\" -r \"${{github.workspace}}\" -j" 
         working-directory: ${{github.workspace}}/build
 
 # Save artifacts        
@@ -109,22 +108,23 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: StaticAnalysis_${{matrix.config.name}}
-          path: ${{github.workspace}}/build/PVS-Studio*
+          path: ${{github.workspace}}/build/${{env.PVS_LOG}}
           retention-days: 7
 
-  CheckStaticAnalysis:
-    if: ${{ always() }}
+  Upload:
     needs: BuildAndAnalyze
     runs-on: 'ubuntu-latest'
-
+    strategy:
+      matrix:
+        Platform: ['Windows', "Linux", "macOS"]
     env:
-      PREFIX_LOG_NAME: 'StaticAnalysis'
-      CONVERTER:       'plog-converter'
+      PREFIX_ARTIFACTS_NAME: 'StaticAnalysis'
+      CONVERTER:             'plog-converter'
     steps:
       - name: Upload artifacts
         uses: actions/download-artifact@v4
         with:
-          pattern: '${{env.PREFIX_LOG_NAME}}_*'
+          pattern: '${{env.PREFIX_ARTIFACTS_NAME}}_*'
           path: '${{github.workspace}}/Merge'
  
       - name: initialize
@@ -137,11 +137,14 @@ jobs:
              sudo apt-get update
              sudo apt-get install pvs-studio 
    
+# Merge and convert static analysis reports             
       - name: Merge Analysis Result
         shell: bash
         env:
-          LOG_LIST: "./${{env.PREFIX_LOG_NAME}}_Windows.log ./${{env.PREFIX_LOG_NAME}}_Linux.log ./${{env.PREFIX_LOG_NAME}}_macOS.log"
-        run: "\"${{env.CONVERTER}}\" -t \"sarif\" -a \"all\" -w -o \"${{env.PVS_SARIF}}\" ${{env.LOG_LIST}}"
+          LOG_WIN: ' ${{github.workspace}}/Merge/${{env.PREFIX_ARTIFACTS_NAME}}_Windows/${{env.PVS_LOG}}'
+          LOG_LINUX: ' ${{github.workspace}}/Merge/${{env.PREFIX_ARTIFACTS_NAME}}_Linux/${{env.PVS_LOG}}'
+          LOG_MACOS: ' ${{github.workspace}}/Merge/${{env.PREFIX_ARTIFACTS_NAME}}_macOS/${{env.PVS_LOG}}'
+        run: "\"${{env.CONVERTER}}\" -t \"sarif\" -a \"all\" -w -o \"${{env.PVS_SARIF}}\" ${{env.LOG_WIN}} ${{env.LOG_LINUX}} ${{env.LOG_MACOS}}"
         working-directory: "${{github.workspace}}/Merge"
 
         # Upload analysis result to GitHub.
