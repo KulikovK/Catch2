@@ -100,7 +100,7 @@ jobs:
           COMPILE_COMMANDS_PATH: "${{github.workspace}}/build/${{env.COMPILE_COMMANDS}}"
           LOG:                   "${{env.PVS_LOG}}_${{matrix.config.name}}.log"
 
-        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{env.COMPILE_COMMANDS_PATH}}\" -o \"${{env.LOG}}_\" -s \"${{env.SUPPRESS_FILE_PATH}}\" -R \"${{env.PVSCONFIG_PATH}}\" -r \"${{github.workspace}}\" -j" 
+        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{env.COMPILE_COMMANDS_PATH}}\" -o \"${{env.LOG}}\" -s \"${{env.SUPPRESS_FILE_PATH}}\" -R \"${{env.PVSCONFIG_PATH}}\" -r \"${{github.workspace}}\" -j" 
         working-directory: ${{github.workspace}}/build
 
 # Save artifacts        
