@@ -141,7 +141,7 @@ jobs:
           LOG_WIN: ' ${{github.workspace}}/Merge/${{env.PREFIX_ARTIFACTS_NAME}}_Windows/${{env.PVS_LOG}}'
           LOG_LINUX: ' ${{github.workspace}}/Merge/${{env.PREFIX_ARTIFACTS_NAME}}_Linux/${{env.PVS_LOG}}'
           LOG_MACOS: ' ${{github.workspace}}/Merge/${{env.PREFIX_ARTIFACTS_NAME}}_macOS/${{env.PVS_LOG}}'
-        run: "\"${{env.CONVERTER}}\" -t \"sarif\" -a \"all\" -w -o \"${{env.PVS_SARIF}}\" ${{env.LOG_WIN}} ${{env.LOG_LINUX}} ${{env.LOG_MACOS}}"
+        run: "\"${{env.CONVERTER}}\" -t \"sarif\" -a \"all\" -w -r \"${{github.workspace}}\" -o \"${{env.PVS_SARIF}}\" ${{env.LOG_WIN}} ${{env.LOG_LINUX}} ${{env.LOG_MACOS}}"
         working-directory: "${{github.workspace}}/Merge"
 
         # Upload analysis result to GitHub.
