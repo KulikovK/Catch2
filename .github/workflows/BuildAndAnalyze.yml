@@ -114,6 +114,7 @@ jobs:
 
   UploadSataticAnalysisResult:
     if: ${{ always() }}
+    needs: BuildAndAnalyze
     runs-on: 'ubuntu-latest'
 
     env:
