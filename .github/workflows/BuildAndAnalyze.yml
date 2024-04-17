@@ -114,9 +114,6 @@ jobs:
   Upload:
     needs: BuildAndAnalyze
     runs-on: 'ubuntu-latest'
-    strategy:
-      matrix:
-        Platform: ['Windows', "Linux", "macOS"]
     env:
       PREFIX_ARTIFACTS_NAME: 'StaticAnalysis'
       CONVERTER:             'plog-converter'
