@@ -65,6 +65,6 @@ namespace {
     }
 
     bool operator!=(SimplePcg32 const& lhs, SimplePcg32 const& rhs) {
-        return lhs.m_state != rhs.m_state;
+        return lhs.m_state != lhs.m_state;
     }
 }
