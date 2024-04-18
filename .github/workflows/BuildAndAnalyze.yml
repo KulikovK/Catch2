@@ -111,7 +111,7 @@ jobs:
           path: ${{github.workspace}}/build/${{env.PVS_LOG}}
           retention-days: 7
 
-  Upload:
+  CheckAndUploadAnalysisResult:
     needs: BuildAndAnalyze
     runs-on: 'ubuntu-latest'
     env:

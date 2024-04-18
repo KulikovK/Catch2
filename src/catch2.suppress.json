@@ -124,16 +124,16 @@
     },
     {
       "CodeCurrent": 1613788908,
-      "CodeNext": 74647,
-      "CodePrev": 1302985306,
+      "CodeNext": 37337,
+      "CodePrev": 2891173671,
       "ErrorCode": "V2006",
       "FileName": "catch_assertion_result.cpp",
       "Message": "Implicit type conversion from enum type to integer type."
     },
     {
       "CodeCurrent": 1613788908,
-      "CodeNext": 37337,
-      "CodePrev": 2891173671,
+      "CodeNext": 74647,
+      "CodePrev": 1302985306,
       "ErrorCode": "V2006",
       "FileName": "catch_assertion_result.cpp",
       "Message": "Implicit type conversion from enum type to integer type."
@@ -317,7 +317,7 @@
     {
       "CodeCurrent": 22733,
       "CodeNext": 147149,
-      "CodePrev": 2651208628,
+      "CodePrev": 2581609629,
       "ErrorCode": "V2507",
       "FileName": "catch_clara.cpp",
       "Message": "The body of the 'if' statement should be enclosed in braces."
@@ -325,7 +325,7 @@
     {
       "CodeCurrent": 22733,
       "CodeNext": 147149,
-      "CodePrev": 2581609629,
+      "CodePrev": 2651208628,
       "ErrorCode": "V2507",
       "FileName": "catch_clara.cpp",
       "Message": "The body of the 'if' statement should be enclosed in braces."
@@ -348,8 +348,24 @@
     },
     {
       "CodeCurrent": 83273,
-      "CodeNext": 920440412,
-      "CodePrev": 141774121,
+      "CodeNext": 352987,
+      "CodePrev": 3150263409,
+      "ErrorCode": "V2507",
+      "FileName": "catch_clara.cpp",
+      "Message": "The body of the 'if' statement should be enclosed in braces."
+    },
+    {
+      "CodeCurrent": 83273,
+      "CodeNext": 352987,
+      "CodePrev": 2621362945,
+      "ErrorCode": "V2507",
+      "FileName": "catch_clara.cpp",
+      "Message": "The body of the 'if' statement should be enclosed in braces."
+    },
+    {
+      "CodeCurrent": 83273,
+      "CodeNext": 352987,
+      "CodePrev": 2621186817,
       "ErrorCode": "V2507",
       "FileName": "catch_clara.cpp",
       "Message": "The body of the 'if' statement should be enclosed in braces."
@@ -372,24 +388,8 @@
     },
     {
       "CodeCurrent": 83273,
-      "CodeNext": 352987,
-      "CodePrev": 2621186817,
-      "ErrorCode": "V2507",
-      "FileName": "catch_clara.cpp",
-      "Message": "The body of the 'if' statement should be enclosed in braces."
-    },
-    {
-      "CodeCurrent": 83273,
-      "CodeNext": 352987,
-      "CodePrev": 2621362945,
-      "ErrorCode": "V2507",
-      "FileName": "catch_clara.cpp",
-      "Message": "The body of the 'if' statement should be enclosed in braces."
-    },
-    {
-      "CodeCurrent": 83273,
-      "CodeNext": 352987,
-      "CodePrev": 3150263409,
+      "CodeNext": 920440412,
+      "CodePrev": 141774121,
       "ErrorCode": "V2507",
       "FileName": "catch_clara.cpp",
       "Message": "The body of the 'if' statement should be enclosed in braces."
@@ -1108,14 +1108,6 @@
     },
     {
       "CodeCurrent": 539,
-      "CodeNext": 2435116130,
-      "CodePrev": 1883177401,
-      "ErrorCode": "V2507",
-      "FileName": "catch_commandline.cpp",
-      "Message": "The body of the 'else' branch should be enclosed in braces."
-    },
-    {
-      "CodeCurrent": 539,
       "CodeNext": 2220512338,
       "CodePrev": 1413372732,
       "ErrorCode": "V2507",
@@ -1126,6 +1118,14 @@
       "CodeCurrent": 539,
       "CodeNext": 2009424235,
       "CodePrev": 691728936,
+      "ErrorCode": "V2507",
+      "FileName": "catch_commandline.cpp",
+      "Message": "The body of the 'else' branch should be enclosed in braces."
+    },
+    {
+      "CodeCurrent": 539,
+      "CodeNext": 2435116130,
+      "CodePrev": 1883177401,
       "ErrorCode": "V2507",
       "FileName": "catch_commandline.cpp",
       "Message": "The body of the 'else' branch should be enclosed in braces."
@@ -3372,8 +3372,16 @@
     },
     {
       "CodeCurrent": 539,
-      "CodeNext": 2238797,
-      "CodePrev": 1786350979,
+      "CodeNext": 11099,
+      "CodePrev": 11093,
+      "ErrorCode": "V2507",
+      "FileName": "catch_reporter_console.cpp",
+      "Message": "The body of the 'else' branch should be enclosed in braces."
+    },
+    {
+      "CodeCurrent": 539,
+      "CodeNext": 3498624525,
+      "CodePrev": 3490662701,
       "ErrorCode": "V2507",
       "FileName": "catch_reporter_console.cpp",
       "Message": "The body of the 'else' branch should be enclosed in braces."
@@ -3388,8 +3396,8 @@
     },
     {
       "CodeCurrent": 539,
-      "CodeNext": 11099,
-      "CodePrev": 11093,
+      "CodeNext": 2238797,
+      "CodePrev": 1786350979,
       "ErrorCode": "V2507",
       "FileName": "catch_reporter_console.cpp",
       "Message": "The body of the 'else' branch should be enclosed in braces."
@@ -3398,14 +3406,6 @@
       "CodeCurrent": 539,
       "CodeNext": 728491224,
       "CodePrev": 2511728962,
-      "ErrorCode": "V2507",
-      "FileName": "catch_reporter_console.cpp",
-      "Message": "The body of the 'else' branch should be enclosed in braces."
-    },
-    {
-      "CodeCurrent": 539,
-      "CodeNext": 3498624525,
-      "CodePrev": 3490662701,
       "ErrorCode": "V2507",
       "FileName": "catch_reporter_console.cpp",
       "Message": "The body of the 'else' branch should be enclosed in braces."
@@ -3588,16 +3588,16 @@
     },
     {
       "CodeCurrent": 2924245,
-      "CodeNext": 288126828,
-      "CodePrev": 1310828449,
+      "CodeNext": 144052076,
+      "CodePrev": 2527918576,
       "ErrorCode": "V2520",
       "FileName": "catch_reporter_console.cpp",
       "Message": "Every switch-clause should be terminated by an unconditional 'break' or 'throw' statement."
     },
     {
       "CodeCurrent": 2924245,
-      "CodeNext": 144052076,
-      "CodePrev": 2527918576,
+      "CodeNext": 288126828,
+      "CodePrev": 1310828449,
       "ErrorCode": "V2520",
       "FileName": "catch_reporter_console.cpp",
       "Message": "Every switch-clause should be terminated by an unconditional 'break' or 'throw' statement."
@@ -3932,16 +3932,16 @@
     },
     {
       "CodeCurrent": 1781333819,
-      "CodeNext": 3316368029,
-      "CodePrev": 1258596223,
+      "CodeNext": 1070270117,
+      "CodePrev": 2298857719,
       "ErrorCode": "V2578",
       "FileName": "catch_reporter_cumulative_base.cpp",
       "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the first function argument."
     },
     {
       "CodeCurrent": 1781333819,
-      "CodeNext": 1070270117,
-      "CodePrev": 2298857719,
+      "CodeNext": 3316368029,
+      "CodePrev": 1258596223,
       "ErrorCode": "V2578",
       "FileName": "catch_reporter_cumulative_base.cpp",
       "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the first function argument."
@@ -4420,14 +4420,6 @@
     },
     {
       "CodeCurrent": 708180336,
-      "CodeNext": 470002284,
-      "CodePrev": 1607506134,
-      "ErrorCode": "V2528",
-      "FileName": "catch_reporter_json.cpp",
-      "Message": "The comma operator should not be used."
-    },
-    {
-      "CodeCurrent": 708180336,
       "CodeNext": 2318981801,
       "CodePrev": 0,
       "ErrorCode": "V2528",
@@ -4435,9 +4427,9 @@
       "Message": "The comma operator should not be used."
     },
     {
-      "CodeCurrent": 708180339,
-      "CodeNext": 3584947383,
-      "CodePrev": 159,
+      "CodeCurrent": 708180336,
+      "CodeNext": 470002284,
+      "CodePrev": 1607506134,
       "ErrorCode": "V2528",
       "FileName": "catch_reporter_json.cpp",
       "Message": "The comma operator should not be used."
@@ -4467,6 +4459,14 @@
       "Message": "The comma operator should not be used."
     },
     {
+      "CodeCurrent": 708180339,
+      "CodeNext": 3584947383,
+      "CodePrev": 159,
+      "ErrorCode": "V2528",
+      "FileName": "catch_reporter_json.cpp",
+      "Message": "The comma operator should not be used."
+    },
+    {
       "CodeCurrent": 847044228,
       "CodeNext": 144761,
       "CodePrev": 2758657893,
@@ -4476,16 +4476,16 @@
     },
     {
       "CodeCurrent": 1416360241,
-      "CodeNext": 1822429832,
-      "CodePrev": 0,
+      "CodeNext": 171071929,
+      "CodePrev": 764728627,
       "ErrorCode": "V2528",
       "FileName": "catch_reporter_json.cpp",
       "Message": "The comma operator should not be used."
     },
     {
       "CodeCurrent": 1416360241,
-      "CodeNext": 171071929,
-      "CodePrev": 764728627,
+      "CodeNext": 1822429832,
+      "CodePrev": 0,
       "ErrorCode": "V2528",
       "FileName": "catch_reporter_json.cpp",
       "Message": "The comma operator should not be used."
@@ -4564,16 +4564,16 @@
     },
     {
       "CodeCurrent": 746873,
-      "CodeNext": 3925015652,
-      "CodePrev": 1435169,
+      "CodeNext": 30688265,
+      "CodePrev": 2318981801,
       "ErrorCode": "V2547",
       "FileName": "catch_reporter_json.cpp",
       "Message": "The return value of non-void function 'startObject' should be used."
     },
     {
       "CodeCurrent": 746873,
-      "CodeNext": 30688265,
-      "CodePrev": 2318981801,
+      "CodeNext": 3925015652,
+      "CodePrev": 1435169,
       "ErrorCode": "V2547",
       "FileName": "catch_reporter_json.cpp",
       "Message": "The return value of non-void function 'startObject' should be used."
@@ -4684,8 +4684,8 @@
     },
     {
       "CodeCurrent": 1801058331,
-      "CodeNext": 4117911982,
-      "CodePrev": 632108006,
+      "CodeNext": 2981255483,
+      "CodePrev": 161429385,
       "ErrorCode": "V2547",
       "FileName": "catch_reporter_json.cpp",
       "Message": "The return value of non-void function 'emplace' should be used."
@@ -4700,8 +4700,8 @@
     },
     {
       "CodeCurrent": 1801058331,
-      "CodeNext": 2981255483,
-      "CodePrev": 161429385,
+      "CodeNext": 4117911982,
+      "CodePrev": 632108006,
       "ErrorCode": "V2547",
       "FileName": "catch_reporter_json.cpp",
       "Message": "The return value of non-void function 'emplace' should be used."
@@ -4764,14 +4764,6 @@
     },
     {
       "CodeCurrent": 708180336,
-      "CodeNext": 470002284,
-      "CodePrev": 1607506134,
-      "ErrorCode": "V2570",
-      "FileName": "catch_reporter_json.cpp",
-      "Message": "Operands of the '||' operator should have bool essential type."
-    },
-    {
-      "CodeCurrent": 708180336,
       "CodeNext": 2318981801,
       "CodePrev": 0,
       "ErrorCode": "V2570",
@@ -4779,9 +4771,9 @@
       "Message": "Operands of the '||' operator should have bool essential type."
     },
     {
-      "CodeCurrent": 708180339,
-      "CodeNext": 3584947383,
-      "CodePrev": 159,
+      "CodeCurrent": 708180336,
+      "CodeNext": 470002284,
+      "CodePrev": 1607506134,
       "ErrorCode": "V2570",
       "FileName": "catch_reporter_json.cpp",
       "Message": "Operands of the '||' operator should have bool essential type."
@@ -4811,6 +4803,14 @@
       "Message": "Operands of the '||' operator should have bool essential type."
     },
     {
+      "CodeCurrent": 708180339,
+      "CodeNext": 3584947383,
+      "CodePrev": 159,
+      "ErrorCode": "V2570",
+      "FileName": "catch_reporter_json.cpp",
+      "Message": "Operands of the '||' operator should have bool essential type."
+    },
+    {
       "CodeCurrent": 847044228,
       "CodeNext": 144761,
       "CodePrev": 2758657893,
@@ -4820,16 +4820,16 @@
     },
     {
       "CodeCurrent": 1416360241,
-      "CodeNext": 1822429832,
-      "CodePrev": 0,
+      "CodeNext": 171071929,
+      "CodePrev": 764728627,
       "ErrorCode": "V2570",
       "FileName": "catch_reporter_json.cpp",
       "Message": "Operands of the '||' operator should have bool essential type."
     },
     {
       "CodeCurrent": 1416360241,
-      "CodeNext": 171071929,
-      "CodePrev": 764728627,
+      "CodeNext": 1822429832,
+      "CodePrev": 0,
       "ErrorCode": "V2570",
       "FileName": "catch_reporter_json.cpp",
       "Message": "Operands of the '||' operator should have bool essential type."
@@ -4860,14 +4860,6 @@
     },
     {
       "CodeCurrent": 708180336,
-      "CodeNext": 470002284,
-      "CodePrev": 1607506134,
-      "ErrorCode": "V2578",
-      "FileName": "catch_reporter_json.cpp",
-      "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the first function argument."
-    },
-    {
-      "CodeCurrent": 708180336,
       "CodeNext": 2318981801,
       "CodePrev": 0,
       "ErrorCode": "V2578",
@@ -4880,7 +4872,7 @@
       "CodePrev": 1607506134,
       "ErrorCode": "V2578",
       "FileName": "catch_reporter_json.cpp",
-      "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the second function argument."
+      "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the first function argument."
     },
     {
       "CodeCurrent": 708180336,
@@ -4891,20 +4883,12 @@
       "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the second function argument."
     },
     {
-      "CodeCurrent": 708180339,
-      "CodeNext": 3584947383,
-      "CodePrev": 159,
+      "CodeCurrent": 708180336,
+      "CodeNext": 470002284,
+      "CodePrev": 1607506134,
       "ErrorCode": "V2578",
       "FileName": "catch_reporter_json.cpp",
-      "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the first function argument."
-    },
-    {
-      "CodeCurrent": 708180339,
-      "CodeNext": 2228472,
-      "CodePrev": 2644426534,
-      "ErrorCode": "V2578",
-      "FileName": "catch_reporter_json.cpp",
-      "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the first function argument."
+      "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the second function argument."
     },
     {
       "CodeCurrent": 708180339,
@@ -4924,8 +4908,32 @@
     },
     {
       "CodeCurrent": 708180339,
+      "CodeNext": 2228472,
+      "CodePrev": 2644426534,
+      "ErrorCode": "V2578",
+      "FileName": "catch_reporter_json.cpp",
+      "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the first function argument."
+    },
+    {
+      "CodeCurrent": 708180339,
       "CodeNext": 3584947383,
       "CodePrev": 159,
+      "ErrorCode": "V2578",
+      "FileName": "catch_reporter_json.cpp",
+      "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the first function argument."
+    },
+    {
+      "CodeCurrent": 708180339,
+      "CodeNext": 85662137,
+      "CodePrev": 382364436,
+      "ErrorCode": "V2578",
+      "FileName": "catch_reporter_json.cpp",
+      "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the second function argument."
+    },
+    {
+      "CodeCurrent": 708180339,
+      "CodeNext": 72529,
+      "CodePrev": 3331495492,
       "ErrorCode": "V2578",
       "FileName": "catch_reporter_json.cpp",
       "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the second function argument."
@@ -4940,16 +4948,8 @@
     },
     {
       "CodeCurrent": 708180339,
-      "CodeNext": 85662137,
-      "CodePrev": 382364436,
-      "ErrorCode": "V2578",
-      "FileName": "catch_reporter_json.cpp",
-      "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the second function argument."
-    },
-    {
-      "CodeCurrent": 708180339,
-      "CodeNext": 72529,
-      "CodePrev": 3331495492,
+      "CodeNext": 3584947383,
+      "CodePrev": 159,
       "ErrorCode": "V2578",
       "FileName": "catch_reporter_json.cpp",
       "Message": "The string literal should not decay to a pointer to wchar_t. Consider inspecting the second function argument."
@@ -7317,7 +7317,7 @@
     {
       "CodeCurrent": 379712415,
       "CodeNext": 11233,
-      "CodePrev": 3802192597,
+      "CodePrev": 2613332537,
       "ErrorCode": "V2507",
       "FileName": "catch_session.cpp",
       "Message": "The body of the 'if' statement should be enclosed in braces."
@@ -7325,7 +7325,7 @@
     {
       "CodeCurrent": 379712415,
       "CodeNext": 11233,
-      "CodePrev": 2613332537,
+      "CodePrev": 3802192597,
       "ErrorCode": "V2507",
       "FileName": "catch_session.cpp",
       "Message": "The body of the 'if' statement should be enclosed in braces."
@@ -7437,7 +7437,7 @@
     {
       "CodeCurrent": 1788310458,
       "CodeNext": 125,
-      "CodePrev": 2937068344,
+      "CodePrev": 1409710386,
       "ErrorCode": "V2600",
       "FileName": "catch_session.cpp",
       "Message": "The function with the 'getchar' name should not be used."
@@ -7445,7 +7445,7 @@
     {
       "CodeCurrent": 1788310458,
       "CodeNext": 125,
-      "CodePrev": 1409710386,
+      "CodePrev": 2937068344,
       "ErrorCode": "V2600",
       "FileName": "catch_session.cpp",
       "Message": "The function with the 'getchar' name should not be used."
@@ -9061,7 +9061,7 @@
     {
       "CodeCurrent": 282017,
       "CodeNext": 88083,
-      "CodePrev": 2343936109,
+      "CodePrev": 33923181,
       "ErrorCode": "V2547",
       "FileName": "catch_textflow.cpp",
       "Message": "The return value of non-void function '++' should be used."
@@ -9069,7 +9069,7 @@
     {
       "CodeCurrent": 282017,
       "CodeNext": 88083,
-      "CodePrev": 33923181,
+      "CodePrev": 2343936109,
       "ErrorCode": "V2547",
       "FileName": "catch_textflow.cpp",
       "Message": "The return value of non-void function '++' should be used."
