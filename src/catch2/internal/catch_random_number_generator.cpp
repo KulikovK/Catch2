@@ -45,7 +45,7 @@ namespace {
         // We could implement this to run in O(log n) steps, but this
         // should suffice for our use case.
         for (uint64_t s = 0; s < skip; ++s) {
-            static_cast<void>((*this)());
+           static_cast<void>((*this)());
         }
     }
 

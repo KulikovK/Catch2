@@ -89,7 +89,6 @@ namespace Catch {
             std::uint64_t rhs_low = Digits( rhs );
             std::uint64_t low_low = ( lhs_low * rhs_low );
             std::uint64_t high_high = CarryBits( lhs ) * CarryBits( rhs );
-            std::uint64_t simple = CarryBits(lhs&0xAAA);
 
             // We add in carry bits from low-low already
             std::uint64_t high_low =
