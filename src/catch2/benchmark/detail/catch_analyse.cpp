@@ -62,7 +62,7 @@ namespace Catch {
 
                     FDuration mean = FDuration(0);
                     int i = 0;
-                    for (auto it = first; it < last; ++it, ++i) {
+                    for (auto it = first; it < last; ++it, ++i) { //-V2528 //-VH"2329349718"
                         samples.push_back(*it);
                         mean += *it;
                     }
