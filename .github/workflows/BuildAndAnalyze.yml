@@ -99,7 +99,12 @@ jobs:
           PVSCONFIG_PATH:        "${{github.workspace}}/src/${{env.PVS_CONFIG_FILE_NAME}}"
           COMPILE_COMMANDS_PATH: "${{github.workspace}}/build/${{env.COMPILE_COMMANDS}}"
 
-        run: "\"${{matrix.config.pvs_analyzer}}\" analyze -f \"${{env.COMPILE_COMMANDS_PATH}}\" -o \"${{env.PVS_LOG}}\" -s \"${{env.SUPPRESS_FILE_PATH}}\" -R \"${{env.PVSCONFIG_PATH}}\" -r \"${{github.workspace}}\" -j" 
+        run: "\"${{matrix.config.pvs_analyzer}}\" analyze 
+            -f \"${{env.COMPILE_COMMANDS_PATH}}\" 
+            -o \"${{env.PVS_LOG}}\" 
+            -s \"${{env.SUPPRESS_FILE_PATH}}\" 
+            -R \"${{env.PVSCONFIG_PATH}}\" 
+            -r \"${{github.workspace}}\" -j" 
         working-directory: ${{github.workspace}}/build
 
 # Save artifacts        
@@ -124,7 +129,8 @@ jobs:
         with:
           pattern: '${{env.PREFIX_ARTIFACTS_NAME}}_*'
           path: '${{github.workspace}}/Merge'
- 
+
+# Install PVS-Studio
       - name: initialize
         shell: bash 
         run: |
@@ -142,10 +148,16 @@ jobs:
           LOG_WIN: ' ${{github.workspace}}/Merge/${{env.PREFIX_ARTIFACTS_NAME}}_Windows/${{env.PVS_LOG}}'
           LOG_LINUX: ' ${{github.workspace}}/Merge/${{env.PREFIX_ARTIFACTS_NAME}}_Linux/${{env.PVS_LOG}}'
           LOG_MACOS: ' ${{github.workspace}}/Merge/${{env.PREFIX_ARTIFACTS_NAME}}_macOS/${{env.PVS_LOG}}'
-        run: "\"${{env.CONVERTER}}\" -t \"sarif\" -a \"all\" -w -r \"${{github.workspace}}\" -o \"${{env.PVS_SARIF}}\" ${{env.LOG_WIN}} ${{env.LOG_LINUX}} ${{env.LOG_MACOS}}"
+        run: "\"${{env.CONVERTER}}\" 
+             -t \"sarif\" 
+             -a \"all\" 
+             -w 
+             -r \"${{github.workspace}}\" 
+             -o \"${{env.PVS_SARIF}}\" 
+             ${{env.LOG_WIN}} ${{env.LOG_LINUX}} ${{env.LOG_MACOS}}"
         working-directory: "${{github.workspace}}/Merge"
 
-        # Upload analysis result to GitHub.
+# Upload analysis result to GitHub.
       - name: Publish static analysis report
         if: '!cancelled()'
         uses: github/codeql-action/upload-sarif@v3
